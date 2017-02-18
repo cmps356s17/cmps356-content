@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduction to JavaScript - Event Handlers</title>
+    <style type = "text/css">
+        img {
+            width: 100px;
+            hight: 100px;
+            display: inline;
+        }
+    </style>
+
+	<script>
+
+        window.onload = function() {
+            var ninjaImage = document.getElementById("happyNinjaImage");
+            var ninjaClickCount = 0;
+
+            ninjaImage.onclick = function () {
+                console.log(this);
+                ninjaClickCount++;
+                alert("Beware the Ninja! This alert " + ninjaClickCount);
+                if (ninjaClickCount > 2) {
+                    alert("سأهشم جهازك ...! لصبر حدود");
+                    this.src = "images/moving-ninja.gif";
+                }
+            }
+        }
+
+		function onNinjaClicked() {
+      		console.log();
+			alert("Beware the Ninja!");
+		}
+
+		function onGenderChange() {
+			var select = document.getElementById("gender-select");
+			alert(select.options[select.selectedIndex].value);
+		}
+	</script>
+</head>
+
+															   
+<body>
+    <img id="happyNinjaImage" src="images/happy-ninja.png" />
+	<img id="ninjaImage" src="images/the-ninja.png" onclick="onNinjaClicked()" />
+    <br>
+	<label for="gender-select">Gender: </label>
+	<select id="gender-select" onchange="onGenderChange()">							  
+		<option value="male">Male</option>
+		<option value="female">Female</option>
+		<option value="alien">Alien</option>
+	</select>
+</body>
+</html>

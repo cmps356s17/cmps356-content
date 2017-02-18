@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduction to JavaScript - Timer</title>
+	<style>
+		#timer, #controls {
+			margin: 15px auto;
+			width: 500px;
+			text-align: center;
+		}
+
+		#timer {
+			font-size: 56px;
+			border: 1px solid black;
+		}
+
+	</style>
+
+    <script>
+        function setTime() {
+            var time = new Date();
+            var hours = time.getHours();
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+            var minutes = time.getMinutes();
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            var seconds = time.getSeconds();
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            var currentTime = "Time is " + hours + " : " + minutes + " : " + seconds;
+            document.getElementById("timer").innerHTML = currentTime;
+
+            console.log(currentTime);
+        }
+
+		var timer;
+		function startTimer() {
+			timer = setInterval(setTime, 1000);
+		}
+
+		function stopTimer() {
+			clearInterval(timer);
+		}
+	</script>
+</head>
+<body onload="setTime()">
+	<div id="timer">
+	</div>
+	<div id="controls">
+		<a href="#" onclick="startTimer()">Start timer</a>
+		<a href="#" onclick="stopTimer()">Stop timer</a>
+	</div>
+</body>
+</html>

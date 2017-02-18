@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <style>
+            #operation {
+                width: 40px
+            }
+           .mainPage {
+                text-align: center;
+            }
+        </style>
+
+        <script src="js/Calculator.js"></script>
+        <script>
+            function computeResult() {
+               
+                var num1 = document.getElementById("num1").value;
+                var num2 = document.getElementById("num2").value;
+                var operation = document.getElementById("operation").value;
+                var resultDiv = document.getElementById("result");
+                
+                var calculator = new Calculator();
+                var result;
+                switch(operation) {
+                    case '+' :
+                        result = calculator.add(num1, num2);
+                        break;
+                    case '-' :
+                        result = calculator.subtract(num1, num2);
+                        break;
+                    case '*' :
+                        result = calculator.mutiply(num1, num2);
+                        break;
+                    case '/' :
+                        result = calculator.divide(num1, num2);
+                        break;
+                }
+                resultDiv.innerHTML = num1 + " " + operation + " " + num2 + " = " + result;
+                console.log(result);
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div class="mainPage">
+            <h1>Calculator</h1>
+            <form>
+                <input type="text" id="num1"  required />
+                <select id="operation" >
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
+                </select>
+                <input type="text" id="num2" required/>
+                <a href="#" onclick="computeResult()">Compute</a> <br>
+                <input type="button" value="Compute" onclick="computeResult()"/>
+                <div id="result"></div>
+            </form>
+        </div>
+    </body>
+</html>
