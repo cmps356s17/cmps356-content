@@ -1,4 +1,3 @@
-"use strict";
 function sum (array) {
     let total = 0;
     array.forEach(function(item) {

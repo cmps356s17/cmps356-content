@@ -1,4 +1,3 @@
-'use strict'
 Array.prototype.getMax = function () {
     let max = this[0];
     for (let i = 1; i < this.length; i++) {

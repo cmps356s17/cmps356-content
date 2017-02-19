@@ -1,4 +1,3 @@
-"use strict";
 let names = new Set();
 names.add('Samir');
 names.add('Fatima');

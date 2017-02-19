@@ -1,4 +1,8 @@
-﻿"use strict";
+﻿/*
+The Math.floor() function returns the largest integer less than or equal to a given number.
+ Math.floor( 45.95); //  45
+*/
+
 let number = Math.floor((Math.random() * 10000));
 
 while (number % 10) {

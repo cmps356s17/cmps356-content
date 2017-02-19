@@ -1,9 +1,8 @@
-"use strict";
 let a = true;
 let b = false;
 
-console.log("a && b = " + (a && b)); // False
-console.log("a || b = " + (a || b)); // True
+console.log("a && b = " + (a && b)); // false
+console.log("a || b = " + (a || b)); // true
 console.log("a ^ b = " + (a ^ b)); // 1	  !!!!!! ^ is XOR
 console.log("!b = " + (!b)); // True
 console.log("b || true = " + (b || true)); // True

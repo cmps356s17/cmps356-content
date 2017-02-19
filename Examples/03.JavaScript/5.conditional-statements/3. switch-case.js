@@ -1,5 +1,4 @@
-﻿"use strict";
-let dayIndex = 3;
+﻿let dayIndex = 3;
 let day;
 
 switch (dayIndex) {

@@ -1,5 +1,3 @@
-"use strict";
-
 console.log("----------------------------------------------------");
 console.log("Regular comparisons: ");
 let a = 5;
@@ -36,4 +34,4 @@ console.log('1 === "1" =' + (oneInt === oneStr));
 console.log('0 == "" = ' + (zeroInt == emptyStr));
 console.log('0 === "" = ' + (zeroInt === emptyStr));
 
-console.log(nullValue == emptyStr)
+console.log('nullValue == emptyStr = ' + (nullValue == emptyStr));

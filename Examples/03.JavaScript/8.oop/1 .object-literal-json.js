@@ -1,4 +1,3 @@
-'use strict'
 let person = {
     firstName: "Salaheddine",
     lastName: "Al-Ayoubi",

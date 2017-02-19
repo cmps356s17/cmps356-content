@@ -1,7 +1,4 @@
-"use strict";
 let colors = ["red", "green", "blue"];
-
-// Create Variables from Array
 
 let [primaryColor, secondaryColor, tertiaryColor] = colors;
 

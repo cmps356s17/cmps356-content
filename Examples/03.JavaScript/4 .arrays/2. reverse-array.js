@@ -1,5 +1,4 @@
-﻿"use strict";
-let array = [1, 2, 3, 4, 5];
+﻿let array = [1, 2, 3, 4, 5];
 
 // Get array size
 let length = array.length;

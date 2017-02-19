@@ -1,4 +1,3 @@
-'use strict'
 let greeting = require('./greeting');
 
 console.log('Loaded greeting module');

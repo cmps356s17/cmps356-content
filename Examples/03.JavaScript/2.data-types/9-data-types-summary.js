@@ -15,8 +15,7 @@ for(let variable of variables){
     console.log(getTypeString(variable));
 }
 
-function getTypeString(obj){
-    let result = obj;
-    result += ' is ' + typeof obj;
+function getTypeString(aVar){
+    let result = `${aVar} is ${typeof (aVar)}`;
     return result;
 }

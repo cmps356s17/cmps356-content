@@ -1,4 +1,3 @@
-'use strict'
 let PI = Math.PI;
 
 exports.area = function (r) {

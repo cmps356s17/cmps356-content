@@ -1,4 +1,3 @@
-'use strict'
 class Polygon {
     constructor(height, width) {
         this.height = height;

@@ -1,4 +1,3 @@
-"use strict";
 let multiLine = `This is an example
 of a multiline string`;
 

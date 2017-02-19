@@ -1,4 +1,3 @@
-'use strict'
 import * as lib from './module1.js';
 console.log("lib.square(11) = ", lib.square(11)); // 121
 console.log("lib.double(4) = ", lib.double(4)); // 8

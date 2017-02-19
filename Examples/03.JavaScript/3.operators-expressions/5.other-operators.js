@@ -1,4 +1,3 @@
-"use strict";
 let first = "First";
 let second = "Second";
 console.log(first + second); // FirstSecond

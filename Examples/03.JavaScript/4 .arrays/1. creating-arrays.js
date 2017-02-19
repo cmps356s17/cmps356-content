@@ -1,5 +1,4 @@
-﻿"use strict";
-let arr = new Array(1, 2, 3, 4, 5);
+﻿let arr = new Array(1, 2, 3, 4, 5);
 console.log("arr = " + arr.join(", "));
 
 let arr2 = new Array(10);

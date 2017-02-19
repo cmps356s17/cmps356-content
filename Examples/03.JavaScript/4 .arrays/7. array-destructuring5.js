@@ -1,4 +1,3 @@
-"use strict";
 let colors = ["red", "green", "blue"];
 
 // Create Variables from Array

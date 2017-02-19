@@ -1,4 +1,3 @@
-'use strict'
 class Student {
     constructor(name, age) {
         this.name = name;
@@ -6,7 +5,7 @@ class Student {
     }
 
     saySalam() {
-        console.log("Salamou Aleikoum! I am " + this.name + ". I am " + this.avgLifeSpan + " years old. <br>");
+        console.log("Salamou Aleikoum! I am " + this.name + ". I am " + this.avgLifeSpan + " years old");
     }
 }
  

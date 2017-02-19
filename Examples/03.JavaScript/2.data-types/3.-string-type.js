@@ -1,10 +1,13 @@
-"use strict";
 let firstName = "Ali";
-let lastName = "Faleh";
-console.log("Hello, " + firstName + "!");
+let lastName = 'Faleh';
 
-let fullName = firstName + " " + lastName;
-console.log("Your full name is " + fullName);
+//Spring Templates are enclosed by the back-tick (` `) (grave accent character) instead of double or single quotes.
+console.log(`Hello, ${firstName} !`);
+
+let fullName = `${firstName} ${lastName}`;
+//String template with multiple lines
+console.log(`Your full name is ${fullName}
+But we do not know your address\n`);
 
 let asSalamuAlaykum = "السلام عليكم";
 console.log(asSalamuAlaykum);

@@ -1,4 +1,3 @@
-"use strict";
 let PI = Math.PI; // 3.141592653589793
 console.log("PI = " + PI);
 
@@ -14,8 +13,8 @@ console.log("PI / 0 = " + div0);
 let divMinus0 = -PI / 0; // -Infinity
 console.log("-PI / 0 = " + divMinus0);
 
-let unknown = div0 / divMinus0; // NaN
-console.log("Infinity / -Infinity = " + unknown);
+let nan = div0 / divMinus0; // NaN
+console.log("Infinity / -Infinity = " + nan);
 
 let eps = Number.EPSILON;
 console.log("Number.EPSILON = " + eps);
