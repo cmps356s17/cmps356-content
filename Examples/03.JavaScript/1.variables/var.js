@@ -5,7 +5,7 @@ function divide(x, y) {
     return result;
 }
 
-//console.log(result); //will through variable not defined error
+//console.log(result); //will throw variable not defined error
 console.log(divide(10, 2));
 
 /*
