@@ -2,7 +2,7 @@ let person = {
     firstName: 'Samir',
     lastName: 'Saghir',
     height: 54,
-    name : function() 
+    name ()
       	{
             return this.firstName + ' ' + this.lastName;
         },

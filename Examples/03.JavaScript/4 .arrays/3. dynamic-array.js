@@ -15,10 +15,10 @@ console.log("Removed: " + head);
 console.log(numbers.join("|")); // result: 1|2|3|4
 
 /*
- The splice() method adds/removes items to/from an array, and returns the removed item(s).
- Note: This method changes the original array.
+ The splice() method adds/removes items to/from an nums, and returns the removed item(s).
+ Note: This method changes the original nums.
  Syntax
- array.splice(index,howmany,item1,.....,itemX)
+ nums.splice(index,howmany,item1,.....,itemX)
  */
 console.log("numbers: " + numbers);
 let deleted = numbers.splice(0, 2, "one", "two", "three");

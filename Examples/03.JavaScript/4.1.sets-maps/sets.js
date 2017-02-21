@@ -8,3 +8,6 @@ names.add('Samir'); // won't be added
 for (let name of names) {
     console.log(name);
 }
+
+let namesArray = Array.from(names);
+console.log("numbersArray:", namesArray);

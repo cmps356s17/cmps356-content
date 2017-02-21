@@ -8,7 +8,7 @@ let display = (x) => {
 
 display('Cool!');
 
-//Map applies a function to every element of the array
+//Map applies a function to every element of the nums
 let numbers  = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 10];
 let squares = numbers.map( square );
 
@@ -34,21 +34,19 @@ function logArrayElement(element, index) {
     console.log("a[" + index + "] = " + element);
 }
 
-//Similar to map method 
+//Similar to numbersMap method
 [2, 5, 9].forEach(logArrayElement);
 
-//reduce method can be used to arrgegate the elements of the array
+//reduce method can be used to arrgegate the elements of the nums
 let total = [0, 1, 2, 3].reduce(function(total, e) {
     return total + e;
 });
-console.log('Total = ' , total); // total == 6
+console.log('Total = ' , total); // sum == 6
 
-//Flatten an array of arrays
+//Flatten an nums of arrays
 let flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
     return a.concat(b);
 });
 
-//Concatenate the elements of an array
+//Concatenate the elements of an nums
 console.log('flattened ', flattened.join(', ')); // flattened is [0, 1, 2, 3, 4, 5]
-
-

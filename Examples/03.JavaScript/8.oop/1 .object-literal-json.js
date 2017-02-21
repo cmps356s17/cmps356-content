@@ -2,9 +2,9 @@ let person = {
     firstName: "Salaheddine",
     lastName: "Al-Ayoubi",
     id: 123,
-    getFullName: function () {
+    getFullName () {
             return `${this.firstName} ${this.lastName}`;
-        }
+    }
 };
 
 console.log(person.getFullName());
@@ -33,7 +33,7 @@ let student = {
     name,
     courses,
 
-    display : function () {
+    display() {
         let msg = this.name + '\n';
 
         for (let course of this.courses) {
