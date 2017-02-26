@@ -1,21 +1,11 @@
-Array.prototype.getMax = function () {
-    let max = this[0];
-    for (let i = 1; i < this.length; i++) {
-        if (max < this[i]) {
-            max = this[i];
-        }
-    }
+Array.prototype.getMax = function() {
+    let max = Math.max(...this);
     return max;
 }
 
 //adding a method to arrays to sum their number elements
-Array.prototype.sum = function(){
-    let sum = 0;
-    for(let index in this){
-        if(typeof this[index] === "number"){
-            sum += this[index];
-        }
-    }
+Array.prototype.sum = function() {
+    let sum = this.reduce((prev, curr) => prev + curr)
     return sum;
 }
 

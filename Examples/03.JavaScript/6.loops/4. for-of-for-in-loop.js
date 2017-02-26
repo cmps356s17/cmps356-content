@@ -18,7 +18,7 @@ let student = {
 		return this.firstName + " " + this.lastName
 	},
 	toString: function () {
-		return "Name: " + this.fullName() + "\nAge: " + this.avgLifeSpan
+		return "Name: " + this.fullName() + "\nAge: " + this.age
 	}
 };
 

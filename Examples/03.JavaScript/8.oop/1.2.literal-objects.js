@@ -4,7 +4,7 @@ let person = {
     height: 54,
     name ()
       	{
-            return this.firstName + ' ' + this.lastName;
+            return `${this.firstName}  ${this.lastName}`;
         },
 
     makeCoffee: function() {

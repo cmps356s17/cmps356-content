@@ -1,11 +1,11 @@
 class Student {
     constructor(name, age) {
         this.name = name;
-        this.avgLifeSpan = age;
+        this.age = age;
     }
 
     saySalam() {
-        console.log("Salamou Aleikoum! I am " + this.name + ". I am " + this.avgLifeSpan + " years old");
+        console.log("Salamou Aleikoum! I am " + this.name + ". I am " + this.age + " years old");
     }
 }
  

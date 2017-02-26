@@ -38,15 +38,11 @@ function logArrayElement(element, index) {
 [2, 5, 9].forEach(logArrayElement);
 
 //reduce method can be used to arrgegate the elements of the nums
-let total = [0, 1, 2, 3].reduce(function(total, e) {
-    return total + e;
-});
+let total = [0, 1, 2, 3].reduce((total, e) => total + e);
 console.log('Total = ' , total); // sum == 6
 
 //Flatten an nums of arrays
-let flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
-    return a.concat(b);
-});
+let flattened = [[0, 1], [2, 3], [4, 5]].reduce((a, b) => a.concat(b));
 
 //Concatenate the elements of an nums
 console.log('flattened ', flattened.join(', ')); // flattened is [0, 1, 2, 3, 4, 5]

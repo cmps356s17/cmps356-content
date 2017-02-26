@@ -2,10 +2,19 @@ let person = {
     firstName: "Salaheddine",
     lastName: "Al-Ayoubi",
     id: 123,
+
+    get fullName () {
+        return `${this.firstName} ${this.lastName}`;
+    },
+
     getFullName () {
             return `${this.firstName} ${this.lastName}`;
     }
 };
+
+console.log(person.firstName);
+
+console.log(person.fullName);
 
 console.log(person.getFullName());
 
@@ -13,7 +22,7 @@ console.log(person.getFullName());
 let person2 = {};
 person2.firstName = "Salaheddine";
 person2.lastName = "Al-Ayoubi";
-person2.avgLifeSpan = "20" ;
+person2.age = "20" ;
 person2.getFullName = function () {
     return `${this.firstName} ${this.lastName}`;
 }

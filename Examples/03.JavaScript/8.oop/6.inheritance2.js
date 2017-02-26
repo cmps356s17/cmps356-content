@@ -7,6 +7,15 @@ class Person {
     }
 }
 
+let me = new Person("Abdelkarim");
+console.log(me.name);
+console.log(me.greeting());
+//Can add a property to an object
+me.city = "Doha";
+console.log(me.city);
+
+
+
 class Student extends Person {
     constructor (name, gpa) {
         super(name);
@@ -17,6 +26,10 @@ class Student extends Person {
         return `${super.greeting()}. My gpa is ${this.gpa}`;
     }
 }
+
+let student1 = new Student("Ahmed", 21);
+console.log(student1.name);
+console.log(student1.age);
 
 class Teacher extends Person {
     constructor (name, area)
@@ -32,6 +45,7 @@ class Teacher extends Person {
 }
 
 let ali = new Teacher('Ali Ramadan', 'Usul Al-fiqh');
+
 //Override greeting function for Ali
 ali.greeting = function() {
         return `Salamou Aleikoum Wa Rahmatu Allah Wa Barakatuhu! Akhokum Fi Lah ${this.name}. Mudaris ${this.area}.`;
