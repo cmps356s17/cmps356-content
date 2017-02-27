@@ -1,0 +1,10 @@
+Do:
+open the terminal (by clicking the black >_ icon at the bottom of Webstorm)
+
+Run this once one line at a time:
+npm install -g babel-cli
+npm install
+
+Recompile if you change .es6 files:
+babel 8.async-await-fetch.es6 -o 8.async-await-fetch.js
+babel 12.read-file-async-await.es6 -o 12.read-file-async-await.js
