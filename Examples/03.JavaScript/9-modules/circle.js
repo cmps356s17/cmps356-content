@@ -1,6 +1,3 @@
-let PI = Math.PI;
-
-// Make two functions available in other files
-exports.area = r => PI * r * r;
-
-exports.circumference = r => 2 * PI * r;
+//Export 2 functions to make functions available in other files
+exports.area = r => Math.PI * r * r;
+exports.circumference = r => 2 * Math.PI * r;
