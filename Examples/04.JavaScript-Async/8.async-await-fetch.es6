@@ -3,7 +3,7 @@
  using async and await since these new features are not yet suppored in Node.js and browsers
  */
 if (typeof window === 'undefined') {
-    require("babel-polyfill");
+    //require("babel-polyfill");
     var fetch = require('node-fetch');
 }
 

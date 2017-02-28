@@ -1,5 +1,5 @@
 function delayedPromise(delay, value) {
-    return new Promise(function(resolve, reject) {
+    return new Promise( (resolve, reject) => {
         setTimeout(function() {
             resolve(value);
             console.log(value, 'finished');
