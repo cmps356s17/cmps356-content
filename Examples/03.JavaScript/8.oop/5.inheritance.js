@@ -1,27 +1,32 @@
-'use strict'
-class Animal {
-    constructor(name) {
-        this.name = name;
+class Person {
+    constructor(firstname, lastname){
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
-    speak() {
-        console.log(this.name + ' makes a noise...');
+    get fullname() {
+        return `${this.firstname} ${this.lastname}`;
     }
-}
 
-class Cat extends Animal {
-    speak() {
-        super.speak();
-        console.log(this.name + ' Meow, Meow ');
+    set fullname(fullname) {
+        [this.firstname, this.lastname] = fullname.split(" ");
     }
-}
 
-class Lion extends Cat {
-    speak() {
-        console.log(this.name + ' Roar, Roar ');
+    greet() {
+        return `Hello, my name is ${this.fullname}`;
     }
 }
 
-let myLion = new Lion('Big lion');
-myLion.speak();
-myLion.toString();
+class Student extends Person {
+    constructor(firstname, lastname, gpa){
+        super(firstname, lastname);
+        this.gpa = gpa;
+    }
+    greet() {
+        return `${super.greet()}. My gpa is ${this.gpa}`;
+    }
+}
+
+let student1 = new Student("Ali", "Faleh", 3.5);
+student1.fullname = "Ali Saleh";
+console.log(student1.greet());

@@ -1,6 +1,6 @@
 const  greeting = require('./greeting');
 
-console.log('Loaded greeting module');
+console.log('Loaded greet module');
 let text = greeting.yahala();
 console.log(text);
 

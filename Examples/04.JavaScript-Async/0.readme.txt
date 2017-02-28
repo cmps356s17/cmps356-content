@@ -5,6 +5,9 @@ Run this once one line at a time:
 npm install -g babel-cli
 npm install
 
-Recompile if you change .es6 files:
+Configure a Babel File Watcher task. Choose File type "EcmaScript 6" & Set the Arguments to:
+$FilePathRelativeToProjectRoot$ --out-dir . --source-maps  --presets es2017
+
+Or manually recompile if you change .es6 files:
 babel 8.async-await-fetch.es6 -o 8.async-await-fetch.js
 babel 9.read-files-async-await.es6 -o 9.read-files-async-await.js

@@ -1,33 +1,21 @@
-'use strict'
-/*If the script is running under node.js then import babel-polyfill module to allow 
- using async and await since these new features are not yet suppored in Node.js and browsers
+/*If the script is running under node.js then import 'node-fetch' package
+ using async and await requires transpiling using babel as these features are not yet suppored in Node.js and browsers
  */
 if (typeof window === 'undefined') {
-    //require("babel-polyfill");
     var fetch = require('node-fetch');
-}
-
-function fetchCountries(region) {
-    let url = `https://restcountries.eu/rest/v1/region/${region}`;
-    return fetch( url ).then(response => response.json());
 }
 
 // create a new "async" function so we can use the "await" keyword
 async function getCountries(region) {
-    // "await" resolution or rejection of the promise
-    // use try/catch for error handling
-    try {
-        let countries = await fetchCountries(region);
-        displayCountries(region, countries);
-    } catch (err) {
-        // promise was rejected and we can handle errors with try/catch!
-        console.log(err);
-    }
+    let url = `https://restcountries.eu/rest/v1/region/${region}`;
+    let response = await fetch( url );
+    let countries = response.json();
+    return countries;
 }
 
 function displayCountries(region, countries) {
     log(`Countries in ${region} and their capital city:`);
-    countries.forEach(country => {
+    countries.map(country => {
         log(`${country.name} - ${country.capital}`);
     });
 }
@@ -41,4 +29,7 @@ function log(text) {
     }
 }
 
-getCountries('asia');
+let region = 'asia';
+getCountries(region)
+    .then ( countries => displayCountries(region, countries) )
+    .catch( err => console.log(err) );

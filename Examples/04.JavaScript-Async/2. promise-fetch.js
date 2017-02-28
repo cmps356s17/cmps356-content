@@ -13,4 +13,4 @@ function displayStudents(students) {
 }
 
 getStudents().then(students => displayStudents(students))
-      .catch(err => console.log(err));
+             .catch(err => console.log(err));

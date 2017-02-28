@@ -1,4 +1,10 @@
-let studentDetails = {id: 123, firstname: "Abas", lastname: "Ibn Firas", progam: "CS"}
+let studentDetails = {
+    id: 123, firstname: "Abas", lastname: "Ibn Firas", progam: "CS",
+    get fullName() {
+        return `${this.firstname} ${this.lastname}`;
+    }
+};
+
 let courses =
     {
         courses: [
@@ -18,16 +24,26 @@ let courses =
             },
             {courseCode: "CMPS251", couseName: "OO Programming", creditHours: 3, semster: "Spring 2016", garde: "B+"},
             {courseCode: "CMPS252", couseName: "OO Programming Lab", creditHours: 1, semster: "Spring 2016", garde: "A"}
-        ]
+        ],
+
+        get coursesCount() {
+            return this.courses.length;
+        }
     };
 
-let address = {street : "123 Amir St", city: "Doha", country: "Qatar"};
+let address = {
+    street : "123 Amir St", city: "Doha", country: "Qatar",
+    getAddress() {
+        return `${this.street} ${this.city} ${this.country}`;
+    }
+};
 
 // Merge multiple sources objects into a target empty object {}
 // Notice the last object will override properties having the same name as the first object
-let student = Object.assign({}, studentDetails, courses, address, {dob: "10/1/2000"}, {firstname: "Abbas", lastname: "Ibnfirnas"});
+let student = Object.assign({}, studentDetails, courses, address, {dob: "10/1/2000"},
+    {id: 445, firstname: "Abbas", lastname: "Ibnfirnas", hasCat: true});
 
-console.log(student);
+console.log(student.fullName, student.getAddress(), "coursesCount: ", student.coursesCount);
 
 let movie1 = {
     name: 'Star Wars',
@@ -35,7 +51,7 @@ let movie1 = {
 };
 
 //We clone movie 1 and override the episode property
-let movie2 = Object.assign({}, movie1, { episode: 8 });
+let movie2 = Object.assign({}, movie1, { episode: 8, rating: 5});
 
-console.log("\nmovie1.episode: ", movie1.episode); // writes 7
-console.log("movie1.episode: ", movie2.episode); // writes 8
+console.log("\nmovie1.episode: ", movie1.episode, "Rating: ", movie1.rating); // writes 7
+console.log("movie2.episode: ", movie2.episode, "Rating: ", movie2.rating); // writes 8
