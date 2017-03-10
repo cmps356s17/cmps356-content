@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <script>
         function getLocation() {
+            /*
+                If we try to call getCurrentPosition in a synchronous way then we will get undefined value
+                because getCurrentPosition is an asynchronous function. Instead we have to call it and pass
+                a callback function to it.
+            */
+            let myLocation = navigator.geolocation.getCurrentPosition(function() {});
+            console.log(myLocation);
+
             navigator.geolocation.getCurrentPosition(showPosition);
         }
 

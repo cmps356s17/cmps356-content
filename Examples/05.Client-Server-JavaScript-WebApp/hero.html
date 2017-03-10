@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Heroes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+    <style>
+        table#hero-show img {
+            width: 400px;
+            height: 300px;
+        }
+
+        table#hero-show td.label {
+            width: 25%;
+            text-align: right;
+            color: #555;
+        }
+
+        .btn {
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="js/hero.js"></script>
+</head>
+<body>
+
+<script id="heroes-template" type="text/x-handlebars-template">
+    <table>
+        {{#each heroes}}
+        <tr>
+            <td>
+                {{ name }}
+            </td>
+            <td>
+                <!-- data-heroId is a custom attribute added to the link -->
+                <!-- class displayButton is added to be able to refer all display buttons
+                    form JavaScript
+                -->
+                <a href="" data-heroId="{{id}}" class="displayButton btn btn-info">
+                    <i class="fa fa-caret-square-o-down"></i> Details
+                </a>
+                <!-- another way to doing it is to call the function when onclick event occurs  -->
+                <a href="javascript:void(0);" onclick="updateHero({{id}});"
+                   data-heroId="{{id}}" class="editButton btn btn-info">
+                    <i class="fa fa-pencil-square-o"></i> Edit
+                </a>
+                <a href="" data-heroId="{{id}}" class="deleteButton btn btn-info">
+                    <i class="fa fa-trash-o"></i> Delete
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</script>
+
+<script id="hero-template" type="text/x-handlebars-template">
+    <h2>Hero details:</h2>
+    <table class="table table-striped" id="hero-show">
+        <tbody>
+        <tr>
+            <td class="label">Name</td>
+            <td>{{name}}</td>
+        </tr>
+        <tr>
+            <td class="label">Type</td>
+            <td>{{heroType}}</td>
+        </tr>
+        <tr>
+            <td class="label">Quote</td>
+            <td>{{quote}}</td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+
+<script id="hero-form-template" type="text/x-handlebars-template">
+    <form>
+        <input type="hidden" id="heroId" value="{{id}}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name"
+                   value="{{name}}" required>
+        </div>
+        <div class="form-group">
+            <label for="quote">Quote</label>
+            <input type="text" class="form-control" id="quote"
+                   value="{{quote}}" required>
+        </div>
+        <div class="form-group">
+            <label for="heroType">Hero Type</label>
+            <select class="form-control" id="heroType" required>
+                <option value=""></option>
+                <option value="Prophet">Prophet</option>
+                <option value="Companion">Companion</option>
+                <option value="Scholar">Scholar</option>
+            </select>
+        </div>
+    </form>
+</script>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <p>
+                Welcome <span id="username"></span>
+            </p>
+            <h1>My hereos:</h1>
+            <a id="addHero" class="btn btn-info" onclick="addHero()">
+                <i class="fa fa-plus"></i> Add
+            </a>
+
+            <div id="heroes-list"></div>
+            <div id="hero-details"></div>
+            <div id="hero-form"></div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

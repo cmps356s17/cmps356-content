@@ -1,8 +1,7 @@
 function avg() {
-    let sum=0; count = 0;
-    for(let i=1; i<=100000000; i++) {
+    let sum=0, count = 999999999;
+    for(let i=1; i<=999999999; i++) {
         sum += i;
-        count++;
     }
     let avg = sum/count;
 
