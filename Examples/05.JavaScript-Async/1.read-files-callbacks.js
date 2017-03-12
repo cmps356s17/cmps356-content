@@ -1,7 +1,7 @@
 let fs = require('fs');
 
 function fetchStudent (studentId, callback) {
-    fs.readFile('data/student.json', function (err, data) {
+    fs.readFile('data/student.json', (err, data) => {
         if (err) {
             callback(err);
         }
@@ -19,7 +19,7 @@ function fetchStudent (studentId, callback) {
 }
 
 function fetchCourses (courseIds, callback) {
-    fs.readFile('data/course.json', function (err, data) {
+    fs.readFile('data/course.json', (err, data) => {
         if (err) {
             callback(err);
         } else {
@@ -33,7 +33,7 @@ function fetchCourses (courseIds, callback) {
 
 function getStudent(studentId, callback) {
     let student;
-    fetchStudent(studentId, function (err, aStudent) {
+    fetchStudent(studentId, (err, aStudent) => {
         student = aStudent;
         fetchCourses(student.courseIds, function (err, courses) {
             student.courses = courses;
@@ -54,7 +54,7 @@ function display(err, student) {
 
 fetchStudent(studentId, display);
 
-getStudent(studentId, function(err, student) {
+getStudent(studentId, (err, student) => {
     console.log("\nStudent with course details: ");
     console.log(JSON.stringify(student, null, 2));
 });

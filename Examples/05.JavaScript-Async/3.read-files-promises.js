@@ -31,8 +31,8 @@ function getCourses(courseIds) {
 function getCourseInstructor(course) {
     return fs.readFile('data/staff.json').then(data => {
         let instructors = JSON.parse(data);
-        course.instructor = instructors.filter(i => i.staffNo === course.instructorId)[0];
-        delete course.instructor.password;
+        course.instructor = instructors.find(ins => ins.staffNo === course.instructorId);
+        delete course.instructor.password;  //No need to return the password attribute
         return course;
     });
 }
@@ -44,6 +44,7 @@ function getStudentCourses(studentId) {
         student = astudent;
         return getCourses(student.courseIds);
     }).then(courses => {
+        //For each course get its instructor. Do so in parrallel using Primise.all
         return Promise.all(courses.map(getCourseInstructor));
     }).then(courses => {
         student.courses = courses;

@@ -9,7 +9,7 @@ if (typeof window === 'undefined') {
 async function getCountries(region) {
     let url = `https://restcountries.eu/rest/v1/region/${region}`;
     let response = await fetch( url );
-    let countries = response.json();
+    let countries = await response.json();
     return countries;
 }
 
@@ -21,7 +21,7 @@ function displayCountries(region, countries) {
 }
 
 function log(text) {
-    //If running in node.js then write to the console otherwise write to the document 
+    //If running in node.js then write to the console otherwise write to the browser document object
     if (typeof window === 'undefined') {
         console.log(text);
     } else {

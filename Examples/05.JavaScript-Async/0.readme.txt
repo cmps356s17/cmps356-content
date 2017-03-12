@@ -1,3 +1,4 @@
+Must have Node.js v7.7.1 or above
 Do:
 Open the terminal (by clicking the black >_ icon at the bottom of Webstorm)
 

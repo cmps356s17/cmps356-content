@@ -1,7 +1,7 @@
 let fs = require('fs-promise');
 
 async function getStudent(studentId) {
-    let data = await fs.readFile('./data/student.json');
+    let data = await fs.readFile('data/student.json');
     let students = JSON.parse(data);
     let student = students.find(s => s.studentId === studentId);
     if (student != "undefined") {
@@ -13,7 +13,7 @@ async function getStudent(studentId) {
 }
 
 async function getCourses(courseIds) {
-    let data = await fs.readFile('./data/course.json');
+    let data = await fs.readFile('data/course.json');
     let courses = JSON.parse(data);
     courses = courses.filter(c => courseIds.indexOf(c.crn) >= 0);
     //console.log(courses);
@@ -21,10 +21,10 @@ async function getCourses(courseIds) {
 }
 
 async function getCourseInstructor(course) {
-    let data = await fs.readFile('./data/staff.json');
+    let data = await fs.readFile('data/staff.json');
     let instructors = JSON.parse(data);
-    course.instructor = instructors.filter(i => i.staffNo === course.instructorId)[0];
-    delete course.instructor.password;
+    course.instructor = instructors.find(ins => ins.staffNo === course.instructorId);
+    delete course.instructor.password;  //No need to return the password attribute
     return course;
 }
 
@@ -32,9 +32,9 @@ async function getCourseInstructor(course) {
 async function getStudentCourses(studentId) {
     let student = await getStudent(studentId);
     let courses = await getCourses(student.courseIds);
-    //Get instructor details for each course
-    courses = await Promise.all(courses.map(getCourseInstructor));
-    student.courses = courses;
+    //Get instructor details for each course. Promise.all allows doing so in parallel.
+    student.courses = await Promise.all( courses.map(course => getCourseInstructor(course)) );
+    
     return student;
 }
 

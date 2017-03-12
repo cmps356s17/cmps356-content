@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{{#if students}}
+    <caption for="studentsDD">Select a student:</caption>
+    <select id="studentsDD">
+        <option value=""></option>
+        {{#each students}}
+            <option value="{{studentId}}"> {{name}}</option>
+        {{/each}}
+    </select>
+{{/if}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
-    <script src="js/student.js"></script>
+<div id="studentDetails"></div>
 
-</head>
-<body>
+<!--
 <script id="student-template" type="text/x-handlebars-template">
     <table border="1">
         <tbody>
@@ -51,13 +52,4 @@
         </tbody>
     </table>
 </script>
-
-<select id="studentsDD">
-    <option value=""></option>
-</select>
-
-<h4>Selected Student:</h4>
-<div id="studentDetails"></div>
-
-</body>
-</html>
+-->

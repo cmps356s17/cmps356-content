@@ -1,4 +1,3 @@
-'use strict'
 let heroRepository = require('./HeroRepository.js');
 heroRepository.getHeroes().then(heroes => {
     console.log(heroes);

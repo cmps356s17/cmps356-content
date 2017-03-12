@@ -7,7 +7,7 @@ let fetchProgram = () => {
 }
 
 let readProgram = () => {
-    return fs.readFile('./data/cas-program.json').then( data => JSON.parse(data) );
+    return fs.readFile('data/cas-program.json').then( data => JSON.parse(data) );
 }
 
 Promise.all([fetchProgram(), readProgram()]).then( programs => {
@@ -18,6 +18,6 @@ Promise.all([fetchProgram(), readProgram()]).then( programs => {
 });
 
 Promise.race([fetchProgram(), readProgram()]).then( programs => {
-    console.log("Results from race of getting CAS and CENG programs: ");
+    console.log("Results from race of getting CAS or CENG programs: ");
     console.log(programs);
 });
