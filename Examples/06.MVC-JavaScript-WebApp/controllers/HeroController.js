@@ -1,7 +1,6 @@
-'use strict'
 class HeroController {
     constructor() {
-        this.heroRepository = require('./HeroRepository');
+        this.heroRepository = require('./../models/HeroRepository');
     }
 
     async getHeroes(req, res) {

@@ -3,6 +3,9 @@ let express		 =	require('express');
 let bodyParser   = 	require('body-parser');
 let handlebars   =  require('express-handlebars');
 
+let studentController = require('./controllers/StudentController');
+let heroController = require('./controllers/HeroController');
+
 let app			 =	express();
 
 //Allow serving static files
@@ -14,8 +17,8 @@ app.use( express.static(__dirname) );
  and exposes the resulting object (containing the keys and values) on req.body.
  */
 app.use( bodyParser.urlencoded({extended: true}) );
-//aut-deserialize the body of incoming request to a json object
-//app.use( bodyParser.json() );
+//If the body of incoming request is a json object then assign it to req.body property
+app.use( bodyParser.json() );
 
 // Bind Handlebars View Engine to html extension so express knows what extension to look for.
 //set extension to .html so handlebars knows what to look for
@@ -27,38 +30,27 @@ app.set('view engine', 'hbs');
 //Set the location of the view templates
 app.set('views', __dirname + '/views');
 
-let studentRepository = require('./StudentRepository');
-let heroController = require('./HeroController');
+app.get('/api/students', (req, res) => studentController.getStudents(req, res));
+app.get('/api/students/:id', (req, res) => studentController.getStudent(req, res));
 
-app.get('/api/students', async (req, res) => {
-    let students = await studentRepository.getStudents();
-    res.json(students);
+app.get('/api/heroes', (req, res) => heroController.getHeroes(req, res));
+app.get('/api/heroes/:id', (req, res) => heroController.getHero(req, res));
+app.post('/api/heroes/', (req, res) => heroController.addHero(req, res));
+app.put('/api/heroes/:id', (req, res) => heroController.updateHero(req, res));
+app.delete('/api/heroes/:id', (req, res) => heroController.deleteHero(req, res));
+
+app.get('/', (req, res) => {
+    res.sendfile("views/index.html");
 });
 
-app.get('/api/students/:id', async (req, res) => {
-    let studentId = req.params.id;
-    console.log('req.params.id', studentId);
-    try {
-        let student = await studentRepository.getStudentCourses( parseInt(studentId) );
-        //console.log(JSON.stringify(student, null, 2));
-        res.json(student);
-    }
-    catch (err) {
-        res.send("Failed :" + err);
-    }
-});
-
-app.post('/', async (req, res) => {
+app.post('/', (req, res) => {
     let userInfo = req.body;
     console.log("app.post.req.body", userInfo);
 
     if (userInfo.requestedPage === 'student') {
-        let students = await studentRepository.getStudents();
-        res.render('student', { username: userInfo.username, students });
+        studentController.index(req, res);
     } else {
-        res.sendfile("hero.html");
-        //userInfo.redirectTo = '/hero.html';
-        //res.json(userInfo);
+        res.sendfile("views/hero.html");
     }
 });
 
@@ -75,12 +67,6 @@ app.get('/about', (req, res) => {
         - Use Postman to test post/put/delete http://localhost:9080/api/heroes <br>
     </p>`);
 });
-
-app.get('/api/heroes', (req, res) => heroController.getHeroes(req, res));
-app.get('/api/heroes/:id', (req, res) => heroController.getHero(req, res));
-app.post('/api/heroes/', (req, res) => heroController.addHero(req, res));
-app.put('/api/heroes/:id', (req, res) => heroController.updateHero(req, res));
-app.delete('/api/heroes/:id', (req, res) => heroController.deleteHero(req, res));
 
 let port = 9080;
 app.listen(port, () => {

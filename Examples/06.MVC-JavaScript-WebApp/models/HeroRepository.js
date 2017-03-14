@@ -30,7 +30,7 @@ class HeroRepository {
         console.log("heroRepository.addHero", hero);
 
         heroes.push(hero);
-        this.fs.writeFile('data/hero.json', heroes);
+        this.fs.writeFile('data/hero.json', JSON.stringify(heroes));
     }
 
     async updateHero(hero) {
@@ -38,11 +38,12 @@ class HeroRepository {
 
         // Look for the hero to be updated then update it
         const foundIndex = heroes.findIndex(h => h.id == hero.id);
+        //console.log("heroRepository.updateHero.foundIndex", foundIndex, hero.id);
 
         if (foundIndex >= 0) {
             heroes[foundIndex] = hero;
-            console.log("heroRepository.updateHero", hero);
-            this.fs.writeFile('data/hero.json', heroes);
+            //console.log("heroRepository.updateHero", hero);
+            this.fs.writeFile('data/hero.json', JSON.stringify(heroes));
         }
     }
 
@@ -55,7 +56,7 @@ class HeroRepository {
         if (foundIndex >= 0) {
             heroes.splice(foundIndex, 1);
             console.log("heroController.deleteHero", heroId);
-            this.fs.writeFile('data/hero.json', heroes);
+            this.fs.writeFile('data/hero.json', JSON.stringify(heroes));
         }
     }
 }
