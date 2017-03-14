@@ -22,12 +22,12 @@ class HeroRepository {
     async addHero(hero) {
         let heroes = await this.getHeroes();
         //Get the last Id used +1
-        let maxId = Math.max(...heroes) + 1;
+        let maxId = Math.max( ...heroes.map(h => h.id) ) + 1;
         console.log("maxId", maxId);
 
         hero.id = maxId;
 
-        console.log("heroRepository.addHero", hero);
+        //console.log("heroRepository.addHero", hero);
 
         heroes.push(hero);
         this.fs.writeFile('data/hero.json', JSON.stringify(heroes));
@@ -55,7 +55,7 @@ class HeroRepository {
 
         if (foundIndex >= 0) {
             heroes.splice(foundIndex, 1);
-            console.log("heroController.deleteHero", heroId);
+            //console.log("heroController.deleteHero", heroId);
             this.fs.writeFile('data/hero.json', JSON.stringify(heroes));
         }
     }

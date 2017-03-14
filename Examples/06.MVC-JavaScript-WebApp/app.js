@@ -3,9 +3,6 @@ let express		 =	require('express');
 let bodyParser   = 	require('body-parser');
 let handlebars   =  require('express-handlebars');
 
-let studentController = require('./controllers/StudentController');
-let heroController = require('./controllers/HeroController');
-
 let app			 =	express();
 
 //Allow serving static files
@@ -30,43 +27,9 @@ app.set('view engine', 'hbs');
 //Set the location of the view templates
 app.set('views', __dirname + '/views');
 
-app.get('/api/students', (req, res) => studentController.getStudents(req, res));
-app.get('/api/students/:id', (req, res) => studentController.getStudent(req, res));
-
-app.get('/api/heroes', (req, res) => heroController.getHeroes(req, res));
-app.get('/api/heroes/:id', (req, res) => heroController.getHero(req, res));
-app.post('/api/heroes/', (req, res) => heroController.addHero(req, res));
-app.put('/api/heroes/:id', (req, res) => heroController.updateHero(req, res));
-app.delete('/api/heroes/:id', (req, res) => heroController.deleteHero(req, res));
-
-app.get('/', (req, res) => {
-    res.sendfile("views/index.html");
-});
-
-app.post('/', (req, res) => {
-    let userInfo = req.body;
-    console.log("app.post.req.body", userInfo);
-
-    if (userInfo.requestedPage === 'student') {
-        studentController.index(req, res);
-    } else {
-        res.sendfile("views/hero.html");
-    }
-});
-
-app.get('/about', (req, res) => {
-    res.send(`Welcome to Client-Server WebApp Example!!! <br>
-    <p>
-        Urls: <br>
-        - http://localhost:9080/student.html to interact with the list of students <br>
-        - http://localhost:9080/api/students  to get students as a json document <br>
-        - http://localhost:9080/api/students/2015001 to get details of student 2015001 as a json document <br><br>
-        - http://localhost:9080/hero.html to interact with the list of heros <br>
-        - http://localhost:9080/api/heroes to get heroes as a json document <br>
-        - http://localhost:9080/api/heroes/1 to get hero 1 as a json document <br>
-        - Use Postman to test post/put/delete http://localhost:9080/api/heroes <br>
-    </p>`);
-});
+//Mount the routes to the app
+let routes = require('./routes');
+app.use('/', routes);
 
 let port = 9080;
 app.listen(port, () => {
