@@ -4,22 +4,21 @@ class StudentController {
     }
 
     async getStudents(req, res) {
-        let students = await
-            this.studentRepository.getStudents();
+        let students = await this.studentRepository.getStudents();
         res.json(students);
     }
 
     async getStudent(req, res) {
-        let studentId = req.params.id;
-        console.log('req.params.id', studentId);
         try {
-            let student = await
-                this.studentRepository.getStudentCourses(parseInt(studentId));
+            let studentId = req.params.id;
+            console.log('req.params.id', studentId);
+
+            let student = await this.studentRepository.getStudentCourses(parseInt(studentId));
             //console.log(JSON.stringify(student, null, 2));
             res.json(student);
         }
         catch (err) {
-            res.send("Failed :" + err);
+            res.status(500).send(err);
         }
     }
 
