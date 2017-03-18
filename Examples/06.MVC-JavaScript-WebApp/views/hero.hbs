@@ -1,0 +1,49 @@
+<h1>My hereos:</h1>
+<a id="addHero" class="btn btn-info" onclick="addHero()">
+    <i class="fa fa-plus"></i> Add
+</a>
+
+<div id="heroes-list">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Quote</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each heroes}}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{heroType}}</td>
+                <td>{{quote}}</td>
+                <td>
+                    <!-- data-heroId is a custom attribute added to the link -->
+                    <!-- class displayButton is added to be able to refer all display buttons
+                        form JavaScript
+                    -->
+                    <a href="" data-hero-id="{{id}}" class="displayButton btn btn-info">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+                    <!-- another way to doing it is to call the function when onclick event occurs  -->
+                    <a href="javascript:void(0);" onclick="updateHero({{id}});"
+                       data-hero-id="{{id}}" class="editButton btn btn-info">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                    <a href="" data-hero-id="{{id}}" class="deleteButton btn btn-info">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<div id="hero-details"></div>
+<div id="hero-form" style="display:none;"></div>
+
+
+<script src="views/js/hero.js"></script>

@@ -1,0 +1,22 @@
+table#hero-show img {
+    width: 400px;
+    height: 300px;
+}
+
+table#hero-show td.label {
+    width: 25%;
+    text-align: right;
+    color: #555;
+}
+
+.btn {
+    margin-bottom: 5px;
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+input:valid {
+    border: 1px solid green;
+}
