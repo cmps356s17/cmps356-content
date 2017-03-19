@@ -30,9 +30,9 @@
     "id": 5
   },
   {
+    "id": 6,
     "name": "Imam Maliq",
-    "heroType": "Scholar",
     "quote": "Knowledge does not come but you have to do to it",
-    "id": 6
+    "heroType": "Scholar"
   }
 ]
