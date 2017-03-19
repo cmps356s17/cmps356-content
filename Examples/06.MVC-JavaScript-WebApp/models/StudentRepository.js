@@ -6,19 +6,11 @@ class StudentRepository {
     async getStudents() {
         const data = await this.fs.readFile('data/student.json')
         let students = JSON.parse(data)
-        //Only return the student Id and names
-        students = students.map(s => {
-            return {
-                studentId: s.studentId,
-                name: `${s.studentId} - ${s.firstname} ${s.lastname}`
-            }
-        })
         return students
     }
 
     async getStudent(studentId) {
-        const data = await this.fs.readFile('data/student.json')
-        let students = JSON.parse(data)
+        let students = await this.getStudents()
         let student = students.find(s => s.studentId === studentId)
         if (student != "undefined") {
             return student
@@ -44,7 +36,6 @@ class StudentRepository {
         return course
     }
 
-// create a new "async" function so we can use the "await" keyword
     async getStudentCourses(studentId) {
         let student = await this.getStudent(studentId)
         let courses = await this.getCourses(student.courseIds)
@@ -52,15 +43,6 @@ class StudentRepository {
         student.courses = await Promise.all( courses.map(course => this.getCourseInstructor(course)) )
         return student
     }
-
-    /*
-     let studentId = 2015002
-     getStudentCourses(studentId)
-     .then( student =>  console.log( JSON.stringify(student, null, 2) ) )
-     .catch( err => console.log(err) )
-
-     //JSON.stringify(student, null, 2) is used to display a pretty-printed multiline JSON representation indented with 2 spaces
-     */
 }
 
 module.exports = new StudentRepository()

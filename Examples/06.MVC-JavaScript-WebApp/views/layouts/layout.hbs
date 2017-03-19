@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>Students App</title>
+    <title>MVC App</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <!-- More info @ http://fontawesome.io/get-started/ -->
     <link rel="stylesheet" href="views/css/font-awesome.min.css">
     <!-- More info @ http://jquerymodal.com/ -->
     <link rel="stylesheet" href="views/css/jquery.modal.min.css">
-    <link rel="stylesheet" href="views/css/styles.css" >
+    <link rel="stylesheet" href="views/css/styles.css">
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="views/js/jquery.modal.min.js"></script>
@@ -17,7 +17,7 @@
 
     <script>
         //Set the active class on the clicked nav-link
-        $(document).ready( () => {
+        $(document).ready(() => {
             // get current URL path and assign 'active' class
             const pathname = window.location.pathname
             //set css class of the link corresponding to the current Url to active
@@ -28,33 +28,35 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">MVC WebApp</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/students">Students</a></li>
-                <li><a href="/heroes">Heroes</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-               {{#if username}}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">MVC WebApp</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/students">Students</a></li>
+            <li><a href="/heroes">Heroes</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {{#if username}}
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span>
                     Welcome {{username}}</a>
                 </li>
                 <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-               {{else}}
+            {{else}}
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-               {{/if}}
-            </ul>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            {{{body}}}
         </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-    {{{body}}}
-
+    </div>
+</div>
 </body>
 </html>

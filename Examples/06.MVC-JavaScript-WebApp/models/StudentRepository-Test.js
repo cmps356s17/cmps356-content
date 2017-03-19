@@ -1,4 +1,5 @@
 let studentRepository = require('./StudentRepository.js')
+
 studentRepository.getStudents().then(students => {
     console.log(students)
 }).catch( err => console.log(err) )

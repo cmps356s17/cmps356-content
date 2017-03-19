@@ -123,7 +123,7 @@ async function deleteHero(event) {
         //This line should be after fetch but it does not work if I do so
         $(this).closest('tr').remove()
 
-        await fetch(url, {method: 'delete'});
+        await fetch(url, { method: 'delete' })
     }
     catch (err) {
         console.log(err)

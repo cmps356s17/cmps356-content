@@ -11,20 +11,19 @@ class StudentController {
     async getStudent(req, res) {
         try {
             let studentId = req.params.id
-            console.log('req.params.id', studentId)
+            console.log('getStudent.req.params.id', studentId)
 
             let student = await this.studentRepository.getStudentCourses(parseInt(studentId))
             //console.log(JSON.stringify(student, null, 2))
             res.json(student)
         }
         catch (err) {
+            console.log(err)
             res.status(500).send(err)
         }
     }
 
     async index (req, res) {
-        let userInfo = req.body
-        console.log("studentController.index.req.body", userInfo)
         let students = await this.studentRepository.getStudents()
         res.render('student', { students })
     }

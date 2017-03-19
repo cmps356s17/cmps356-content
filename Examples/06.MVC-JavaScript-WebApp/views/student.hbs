@@ -3,7 +3,7 @@
     <select id="studentsDD">
         <option value=""></option>
         {{#each students}}
-            <option value="{{studentId}}"> {{name}}</option>
+            <option value="{{studentId}}"> {{studentId}} - {{firstname}} {{lastname}}</option>
         {{/each}}
     </select>
 {{/if}}
