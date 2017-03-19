@@ -39,7 +39,14 @@
                 <li><a href="/heroes">Heroes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome {{username}}</a></li>
+               {{#if username}}
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+                    Welcome {{username}}</a>
+                </li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+               {{else}}
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+               {{/if}}
             </ul>
         </div>
     </nav>

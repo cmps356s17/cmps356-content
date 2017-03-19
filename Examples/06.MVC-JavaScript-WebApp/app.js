@@ -1,5 +1,6 @@
 let express		 =	require('express')
 let bodyParser   = 	require('body-parser')
+let cookieParser = 	require('cookie-parser')
 let handlebars   =  require('express-handlebars')
 
 let app			 =	express()
@@ -15,10 +16,11 @@ app.use( express.static(__dirname) )
 app.use( bodyParser.urlencoded({extended: true}) )
 //If the body of incoming request is a json object then assign it to req.body property
 app.use( bodyParser.json() )
+app.use( cookieParser() )
 
 // Bind Handlebars View Engine to html extension so express knows what extension to look for.
 //set extension to .html so handlebars knows what to look for
-app.engine('hbs', handlebars({defaultLayout: 'main', extname: '.hbs'}))
+app.engine('hbs', handlebars({defaultLayout: 'layout', extname: '.hbs'}))
 
 // Register handlebars as our view engine as the view engine
 app.set('view engine', 'hbs')

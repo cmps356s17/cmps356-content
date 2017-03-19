@@ -26,7 +26,7 @@ class StudentController {
         let userInfo = req.body
         console.log("studentController.index.req.body", userInfo)
         let students = await this.studentRepository.getStudents()
-        res.render('student', {username: userInfo.username, students})
+        res.render('student', { students })
     }
 }
 
