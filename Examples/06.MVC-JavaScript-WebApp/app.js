@@ -21,10 +21,10 @@ app.use( cookieParser() )
 
 /* Configure handlebars:
  set extension to .hbs so handlebars knows what to look for
- set the defaultLayout to layout so that all partial templates will be renders with this
- the layout.hbs defines the shell page, define the common menu and imports all the common css and javascript
+ set the defaultLayout to 'layout' so that all partial templates will be rendered and inserted in the {{{body}}}
+ the layout.hbs defines define page elements such as the menu and imports all the common css and javascript files
  */
-app.engine('hbs', handlebars({defaultLayout: 'layout', extname: '.hbs'}))
+app.engine( 'hbs', handlebars( {defaultLayout: 'layout', extname: '.hbs'} ) )
 
 // Register handlebars as the view engine to be used to render the templates
 app.set('view engine', 'hbs')

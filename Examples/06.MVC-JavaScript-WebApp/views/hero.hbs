@@ -14,11 +14,11 @@
         </tr>
         </thead>
         <tbody>
-        {{#each heroes}}
+        {{#heroes}}
             <tr>
                 <td>{{ name }}</td>
-                <td>{{heroType}}</td>
-                <td>{{quote}}</td>
+                <td>{{ heroType }}</td>
+                <td>{{ quote }}</td>
                 <td>
                     <!-- data-heroId is a custom attribute added to the link -->
                     <!-- class displayButton is added to be able to refer all display buttons
@@ -37,7 +37,7 @@
                     </a>
                 </td>
             </tr>
-        {{/each}}
+        {{/heroes}}
         </tbody>
     </table>
 </div>
