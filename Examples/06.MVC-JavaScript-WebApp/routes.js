@@ -41,13 +41,13 @@ router.get('/logout', (req, res) => {
 
 //Middleware to intercept requests and redirect to the login page if the user is not logged-in
 router.use( (req, res, next) => {
-    const username = req.cookies.username
-    console.log("isAuthenticated.username", username)
-
-    if (!username) {
+    if (!req.cookies.username) {
         res.redirect("/login")
     }
     else {
+        const username = req.cookies.username
+        console.log("isAuthenticated.username", username)
+
         //Allows accessing username variable from handlebars template
         res.locals.username = username
         return next()

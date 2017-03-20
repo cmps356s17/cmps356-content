@@ -1,4 +1,4 @@
-let htmlTemplate =`
+let studentTemplate =`
     <h4>Selected Student:</h4>
     <table class="table table-striped">
         <tbody>
@@ -41,12 +41,8 @@ let htmlTemplate =`
     </table>
 `
 
-
-//When the document is loaded in the browser then fill the students dropdown.
+//When the document is loaded in the browser then listen to studentsDD on change event
 $(document).ready( () => {
-    /*    getStudents().then(students => fillStudentsDD(students))
-        .catch(err => console.log(err))*/
-
     $("#studentsDD").on('change', onStudentChange)
 })
 
@@ -67,23 +63,16 @@ async function onStudentChange() {
 
     try {
         let student = await getStudent(selectedStudentId)
-        displayStudent(student)
+        let htmlTemplate = Handlebars.compile(studentTemplate)
+        let htmlContent = htmlTemplate(student)
+
+        $('#studentDetails').html(htmlContent)
     }
     catch (err) {
         console.log(err)
     }
 }
 
-function displayStudent(student) {
-
-    //let htmlTemplate = $('#student-template').html(),
-    let studentTemplate = Handlebars.compile(htmlTemplate)
-    let htmlContent = studentTemplate(student)
-
-    //console.log('studentTemplate(student)', htmlContent)
-
-    $('#studentDetails').html(htmlContent)
-}
     //Much better to use a UI template to generate the UI
     //This will be ignored!!
     /*

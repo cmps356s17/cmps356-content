@@ -1,12 +1,11 @@
 {
-  "name": "Client-Server-WebApp",
+  "name": "MVC-WebApp",
   "version": "0.0.1",
   "dependencies": {
-    "body-parser": "^1.15.0",
+    "body-parser": "^1.17.0",
     "cookie-parser": "^1.4.3",
-    "express": "^4.13.4",
+    "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
-    "fs-promise": "^2.0.0",
-    "open": "0.0.5"
+    "fs-promise": "^2.0.0"
   }
 }

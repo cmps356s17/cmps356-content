@@ -63,7 +63,7 @@ async function displayHero(event) {
         const hero = await fetchHero(heroId)
         console.log(hero)
 
-        //let htmlTemplate = $('#hero-template').html(),
+        //let studentTemplate = $('#hero-template').html(),
         let htmlTemplate = Handlebars.compile(heroTemplate)
 
         $('#hero-details').html(htmlTemplate(hero))

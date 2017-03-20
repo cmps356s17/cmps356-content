@@ -1,12 +1,12 @@
-let express		 =	require('express')
-let bodyParser   = 	require('body-parser')
-let cookieParser = 	require('cookie-parser')
-let handlebars   =  require('express-handlebars')
+const express	   =  require('express')
+const bodyParser   =  require('body-parser')
+const cookieParser =  require('cookie-parser')
+const handlebars   =  require('express-handlebars')
 
-let app			 =	express()
+const app		   =   express()
 
 //Allow serving static files from __dirname which is the current folder
-app.use( express.static(__dirname + '/public') )
+app.use( express.static(__dirname) )
 
 /*
  body-parser extracts the entire body portion of an incoming request and assigns it to req.body.
@@ -16,24 +16,28 @@ app.use( express.static(__dirname + '/public') )
 app.use( bodyParser.urlencoded({extended: true}) )
 //If the body of incoming request is a json object then assign it to req.body property
 app.use( bodyParser.json() )
+
 app.use( cookieParser() )
 
-// Bind Handlebars View Engine to html extension so express knows what extension to look for.
-//set extension to .html so handlebars knows what to look for
+/* Configure handlebars:
+ set extension to .hbs so handlebars knows what to look for
+ set the defaultLayout to layout so that all partial templates will be renders with this
+ the layout.hbs defines the shell page, define the common menu and imports all the common css and javascript
+ */
 app.engine('hbs', handlebars({defaultLayout: 'layout', extname: '.hbs'}))
 
-// Register handlebars as our view engine as the view engine
+// Register handlebars as the view engine to be used to render the templates
 app.set('view engine', 'hbs')
 
 //Set the location of the view templates
 app.set('views', __dirname + '/views')
 
 //Mount the routes to the app
-let routes = require('./routes')
+const routes = require('./routes')
 app.use('/', routes)
 
-let port = 9080
+const port = 9080
 app.listen(port, () => {
-    let host = "localhost"
+    const host = "localhost"
     console.log(`Students App is running @ http://${host}:${port}`)
 })
