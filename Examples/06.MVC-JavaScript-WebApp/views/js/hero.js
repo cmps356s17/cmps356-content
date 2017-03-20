@@ -18,7 +18,12 @@ const heroTemplate = `
 </table>`
 
 const heroFormTemplate = `
-    <h2>Hero Details</h2>
+    {{#if id}}
+        <h2>Update Hero Details</h2>
+    {{else}}
+        <h2>Add Hero</h2>
+    {{/if}}
+    <br>
     <form method="post" action="/heroes">
         <input type="hidden" id="heroId" name="id" value="{{id}}">
         <div class="form-group">

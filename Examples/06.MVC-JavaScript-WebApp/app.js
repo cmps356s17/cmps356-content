@@ -6,7 +6,7 @@ const handlebars   =  require('express-handlebars')
 const app		   =   express()
 
 //Allow serving static files from __dirname which is the current folder
-app.use( express.static(__dirname) )
+app.use( express.static(__dirname ) )
 
 /*
  body-parser extracts the entire body portion of an incoming request and assigns it to req.body.

@@ -29,7 +29,8 @@ router.route('/login')
         console.log("router.post.req.body", userInfo)
 
         //Return an accessCount cookie to the client -- expires is optional
-        res.cookie('username', userInfo.username, { expires: new Date(Date.now() + 1000 * 360 * 1) })
+        const duration24H = 24*60*60*1000
+        res.cookie('username', userInfo.username, { expires: new Date(Date.now() + duration24H) })
         res.redirect('/')
     })
 
@@ -59,6 +60,8 @@ router.get('/students', (req, res) => studentController.index(req, res) )
 router.route('/heroes')
     .get( (req, res) => heroController.index(req, res) )
     .post( (req, res) => heroController.postHero(req, res) )
+
+router.get('/heroes/:id', (req, res) => heroController.heroForm(req, res) )
 
 module.exports = router
 

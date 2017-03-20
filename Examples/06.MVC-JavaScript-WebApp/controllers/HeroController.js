@@ -59,10 +59,25 @@ class HeroController {
     }
 
     async index (req, res) {
-/*        const userInfo = req.body
-        console.log("heroController.index.req.body", userInfo)*/
         const heroes = await this.heroRepository.getHeroes()
-        res.render('hero', { heroes })
+
+        //heroes-ssr template will enable rendering the add/update forms on the server
+        //Change to 'heroes-csr' if you would like to render the add/update forms on the client
+        res.render('heroes-ssr', {heroes})
+    }
+
+    async heroForm (req, res) {
+        const heroId = req.params.id
+        let hero;
+
+        console.log("heroForm.heroId", heroId)
+
+        //If heroId is not equal to new and if it is a number then get the hero to pass it to the template
+        if (heroId != 'new' && !isNaN(parseInt(heroId)) ) {
+            hero = await this.heroRepository.getHero( parseInt(heroId) )
+        }
+
+        res.render('hero-form', hero )
     }
 
     async postHero(req, res) {
@@ -78,6 +93,7 @@ class HeroController {
             res.redirect("/heroes")
         }
         catch (err) {
+            console.log(err)
             res.status(500).send(err)
         }
     }
