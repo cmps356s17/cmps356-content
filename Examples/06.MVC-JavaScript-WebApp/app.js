@@ -3,6 +3,7 @@ const bodyParser   =  require('body-parser')
 const cookieParser =  require('cookie-parser')
 const handlebars   =  require('express-handlebars')
 
+
 const app		   =   express()
 
 //Allow serving static files from __dirname which is the current folder
@@ -35,6 +36,7 @@ app.set('views', __dirname + '/views')
 //Mount the routes to the app
 const routes = require('./routes')
 app.use('/', routes)
+
 
 const port = 9080
 app.listen(port, () => {

@@ -27,9 +27,10 @@ class HeroController {
             hero = await this.heroRepository.addHero(hero)
             const urlOfNewHero = `/api/heroes/${hero.id}`
             res.location(urlOfNewHero)
-            res.status(201)
+            res.status(201).send("created")
         }
         catch (err) {
+            console.log(err)
             res.status(500).send(err)
         }
     }
@@ -39,7 +40,7 @@ class HeroController {
             const hero = req.body
 
             await this.heroRepository.updateHero(hero)
-            res.status(200)
+            res.status(200).send("ok")
         }
         catch (err) {
             res.status(500).send(err)
@@ -51,7 +52,7 @@ class HeroController {
             const heroId = req.params.id
 
             await this.heroRepository.deleteHero(heroId)
-            res.status(200)
+            res.status(200).send("ok")
         }
         catch (err) {
             res.status(500).send(err)

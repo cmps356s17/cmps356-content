@@ -1,9 +1,20 @@
 let express = require('express')
 
 let router = express.Router()
+const fs = require("fs-promise")
 
 let studentController = require('./controllers/StudentController')
 let heroController = require('./controllers/HeroController')
+
+//Example route with multiple parameters
+//Request example: authors/erradi/books/1234678
+router.get('/api/authors/:author/books/:isbn', (req, res) => {
+    console.log(req.params.author)
+    console.log(req.params.isbn)
+
+    //This returns the received parameters as a json object
+    res.json(req.params)
+})
 
 // Students Web API
 router.get('/api/students', (req, res) => studentController.getStudents (req, res) )

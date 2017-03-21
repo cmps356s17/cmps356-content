@@ -30,7 +30,8 @@ class HeroRepository {
         //console.log("heroRepository.addHero", hero)
 
         heroes.push(hero)
-        this.fs.writeFile('data/hero.json', JSON.stringify(heroes))
+        await this.fs.writeFile('data/hero.json', JSON.stringify(heroes))
+        return hero;
     }
 
     async updateHero(hero) {

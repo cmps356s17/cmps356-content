@@ -52,6 +52,11 @@ const heroFormTemplate = `
 
 //When the document is loaded register event handlers
 $(document).ready(function () {
+    /* Here jQuery is excellent, it allows easily adding events to elements
+        that will be added dynamically to the DOM after the initial page load
+        doing this in plain JS is feasible but bit more complicated
+        See more details @ http://stackoverflow.com/questions/14174056/native-addeventlistener-with-selector-like-on-in-jquery
+    */
     $('#heroes-list').on('click', 'a.displayButton', displayHero)
     $('#heroes-list').on('click', 'a.deleteButton', deleteHero)
 })

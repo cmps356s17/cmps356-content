@@ -29,10 +29,17 @@
 
 {{#if id}}
     <script>
-        //After the document is loaded then select the heroType in the heroType dropdown
-        $(document).ready(function () {
+        //After the document is loaded then select the current heroType in the heroType dropdown
+        //Using plain JavaScript
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector('#heroType option[value="{{ heroType }}"]').selected = true
+        })
+
+        //After the document is loaded then select the current heroType in the heroType dropdown
+        //Another way of doing this using jQuery
+        /*$(document).ready(function () {
             //Select the heroType in the Dropdown
             $('#heroType').val( '{{ heroType }}' )
-        })
+        })*/
     </script>
 {{/if}}
