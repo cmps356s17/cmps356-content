@@ -23,6 +23,8 @@ app.set('views', __dirname + '/views')
 //Allow serving static files
 app.use(express.static(__dirname));
 
+//Resave: Forces the session to be saved back to the session store, even if the session was never modified during the request.
+//saveUninitialized: Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
 app.use(session({
     cookie: {
         path    : '/',
@@ -68,6 +70,6 @@ app.post('/shop', isAuthenticated, (req, res) => appController.addItemToCart(req
 app.get('/logout', (req, res) => appController.logout(req, res));
 
 let port = 3000;
-app.listen(port,function(){
+app.listen(port, () => {
 	console.log('App running @ http://localhost:' + port);
 });
