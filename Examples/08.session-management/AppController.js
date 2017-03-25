@@ -31,7 +31,7 @@ class AppController {
         }
         //Return an accessCount cookie to the client -- expires is optional
         res.cookie('accessCount', accessCount, { expires: new Date(Date.now() + 1000 * 360 * 1) });
-        //res.sendFile(path.join(__dirname + '/views/hala.html'));
+        //res.sendFile(path.join(__dirname + '/views/hala.hbs'));
         res.render('hala');
     }
 

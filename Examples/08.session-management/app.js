@@ -6,13 +6,19 @@ let cookieParser = 	require('cookie-parser');
 
 let handlebars   =  require('express-handlebars');
 let app			 =	express();
-// Bind Handlebars View Engine to html extension so express knows what extension to look for.
-//set extension to .html so handlebars knows what to look for
-app.engine('html', handlebars({defaultLayout: 'main', extname: '.html'}));
-// Register handlebars as our view engine as the view engine
-app.set('view engine', 'html');
+
+/* Configure handlebars:
+ set extension to .hbs so handlebars knows what to look for
+ set the defaultLayout to 'main' so that all partial templates will be rendered and inserted in the main's {{{body}}}
+ the main.hbs defines define page elements such as the menu and imports all the common css and javascript files
+ */
+app.engine( 'hbs', handlebars( {defaultLayout: 'main', extname: '.hbs'} ) )
+
+// Register handlebars as the view engine to be used to render the templates
+app.set('view engine', 'hbs')
+
 //Set the location of the view templates
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/views')
 
 //Allow serving static files
 app.use(express.static(__dirname));
