@@ -62,9 +62,7 @@ class HeroController {
     async index (req, res) {
         const heroes = await this.heroRepository.getHeroes()
 
-        //heroes-ssr template will enable rendering the add/update forms on the server
-        //Change to 'heroes-csr' if you would like to render the add/update forms on the client
-        res.render('heroes-ssr', {heroes})
+        res.render('heroes', {heroes})
     }
 
     async heroForm (req, res) {

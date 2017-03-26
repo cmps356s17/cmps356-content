@@ -4,8 +4,12 @@
     <i class="fa fa-plus"></i> Add
 </a>
 
+<a id="addHero" class="btn btn-info" href="/heroes/new">
+    <i class="fa fa-plus"></i> Add using server-rendered form
+</a>
+
 <div id="heroes-list">
-    <table class="table table-striped">
+    <table id="heroesTable" class="table table-striped">
         <thead>
         <tr>
             <td>Name</td>
@@ -16,25 +20,23 @@
         </thead>
         <tbody>
         {{#heroes}}
-            <tr>
+            <tr data-heroid="{{id}}">
                 <td>{{ name }}</td>
                 <td>{{ heroType }}</td>
                 <td>{{ quote }}</td>
                 <td>
-                    <!-- data-heroId is a custom attribute added to the link -->
-                    <!-- class displayButton is added to be able to refer all display buttons
-                        form JavaScript
-                    -->
-                    <a href="" data-hero-id="{{id}}" class="displayButton btn btn-info">
+                    <button onclick="displayHero({{id}})" class="btn btn-info">
                         <i class="fa fa-info-circle"></i>
-                    </a>
-                    <!-- another way to doing it is to call the function when onclick event occurs  -->
-                    <a href="javascript:void(0);" onclick="updateHero({{id}});"
-                       data-hero-id="{{id}}" class="editButton btn btn-info">
+                    </button>
+                    <button onclick="updateHero({{id}})" class="btn btn-info">
                         <i class="fa fa-pencil-square-o"></i>
-                    </a>
-                    <a href="" data-hero-id="{{id}}" class="deleteButton btn btn-info">
+                    </button>
+                    <button onclick="deleteHero({{id}})" class="btn btn-info">
                         <i class="fa fa-trash-o"></i>
+                    </button>
+
+                    <a href="/heroes/{{id}}" class="btn btn-info">
+                        <i class="fa fa-pencil-square-o"></i> Edit using server-rendered form
                     </a>
                 </td>
             </tr>
@@ -44,7 +46,7 @@
 </div>
 
 <div id="hero-details"></div>
-<div id="hero-form" style="display:none;"></div>
+<div id="hero-form" class="iziModal"></div>
 
 
 <script src="/views/js/hero.js"></script>

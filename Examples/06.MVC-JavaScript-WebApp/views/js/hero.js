@@ -18,12 +18,6 @@ const heroTemplate = `
 </table>`
 
 const heroFormTemplate = `
-    {{#if id}}
-        <h2>Update Hero Details</h2>
-    {{else}}
-        <h2>Add Hero</h2>
-    {{/if}}
-    <br>
     <form method="post" action="/heroes">
         <input type="hidden" id="heroId" name="id" value="{{id}}">
         <div class="form-group">
@@ -46,27 +40,10 @@ const heroFormTemplate = `
         </div>
         <input type="submit" class="btn btn-primary">
               
-        <a ref="#" rel="modal:close" stye="text-align: right"> Close </a>
+        <button data-izimodal-close="" class="btn btn-primary">Cancel</button>
     </form>`
 
-
-//When the document is loaded register event handlers
-$(document).ready(function () {
-    /* Here jQuery is excellent, it allows easily adding events to elements
-        that will be added dynamically to the DOM after the initial page load
-        doing this in plain JS is feasible but bit more complicated
-        See more details @ http://stackoverflow.com/questions/14174056/native-addeventlistener-with-selector-like-on-in-jquery
-    */
-    $('#heroes-list').on('click', 'a.displayButton', displayHero)
-    $('#heroes-list').on('click', 'a.deleteButton', deleteHero)
-})
-
-async function displayHero(event) {
-    //Prevent the default browser behavior when a link is clicked
-    event.preventDefault()
-    //Get the data-heroId custom attribute associated with the clicked Link
-    //Note this refers to the link that was clicked (i.e., the source of the click event)
-    let heroId = $(this).data('heroId')
+async function displayHero(heroId) {
     console.log("displayHero.heroId: ", heroId)
 
     try {
@@ -76,7 +53,7 @@ async function displayHero(event) {
         //let studentTemplate = $('#hero-template').html(),
         let htmlTemplate = Handlebars.compile(heroTemplate)
 
-        $('#hero-details').html(htmlTemplate(hero))
+        document.querySelector('#hero-details').innerHTML = htmlTemplate(hero)
     }
     catch (err) {
         console.log(err)
@@ -91,12 +68,25 @@ async function updateHero(heroId) {
 
         const formTemplate = Handlebars.compile(heroFormTemplate)
 
-        $('#hero-form').html( formTemplate(hero) )
+        document.querySelector('#hero-form').innerHTML = formTemplate(hero)
+
+        //Strange - if I do not do this then the form title is not shown
+        $('#hero-form').iziModal('destroy');
+        $("#hero-form").iziModal({
+            title: "Update Hero",
+            icon: 'icon-chat',
+            iconColor: 'white',
+            width: 600,
+            padding: 20,
+        });
+        $("#hero-form").iziModal('open');
+
 
         //Select the heroType in the Dropdown
-        $('#heroType').val(hero.heroType)
-        $("#hero-form").modal()
-
+        //$('#heroType').val(hero.heroType)
+        //Select the current heroType in the heroType dropdown
+        document.querySelector(`#heroType option[value="${hero.heroType}"]`).selected = true
+        console.log(document.querySelector('#heroType').value )
     }
     catch (err) {
         console.log(err)
@@ -106,14 +96,22 @@ async function updateHero(heroId) {
 function addHero() {
     let formTemplate = Handlebars.compile(heroFormTemplate)
 
-    $('#hero-form').html(formTemplate({}))
-    $("#hero-form").modal()
+    document.querySelector('#hero-form').innerHTML = formTemplate({})
+
+    //Show form as model poup form
+    //Strange - if I do not do this then the form title is not shown
+    $('#hero-form').iziModal('destroy');
+    $("#hero-form").iziModal({
+        title: "Add Hero",
+        icon: 'icon-chat',
+        iconColor: 'white',
+        width: 600,
+        padding: 20,
+    });
+    $("#hero-form").iziModal('open');
 }
 
-async function deleteHero(event) {
-    //Prevent the default browser behavior when a link is clicked
-    event.preventDefault()
-
+async function deleteHero(heroId) {
     // Ask the user to confirm. If they cancel the request then exit this function
     if (!confirm('Confirm delete?')) {
         return
@@ -122,8 +120,6 @@ async function deleteHero(event) {
     //Get the data-heroId custom attribute associated with the clicked Link
     //Note this refers to the link that was clicked (i.e., the source of the click event)
     try {
-
-        let heroId = $(this).data('heroId')
         console.log("deleteHero.heroId: ", heroId)
 
         let url = `/api/heroes/${heroId}`
@@ -131,7 +127,13 @@ async function deleteHero(event) {
 
         //After successful delete remove the row from the HTML table
         //This line should be after fetch but it does not work if I do so
-        $(this).closest('tr').remove()
+        //$(this).closest('tr').remove()
+        //this.parentNode.parentNode.removeChild()
+        const heroesTable = document.querySelector(`#heroesTable tbody`)
+        const trToDelete = heroesTable.querySelector(`tr[data-heroid="${heroId}"]`)
+        heroesTable.removeChild(trToDelete)
+        
+        console.log(trToDelete)
 
         await fetch(url, { method: 'delete' })
     }

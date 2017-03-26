@@ -23,16 +23,13 @@ app.set('views', __dirname + '/views')
 //Allow serving static files
 app.use(express.static(__dirname));
 
+//secret: secret is used to hash the session key
 //Resave: Forces the session to be saved back to the session store, even if the session was never modified during the request.
 //saveUninitialized: Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
-app.use(session({
-    cookie: {
-        path    : '/',
-        maxAge  : 24*60*60*1000
-    },
-    secret: 'mysecret'
-    , saveUninitialized: true, resave: true
-}));
+app.use( session( {
+        secret: 'mysecret',
+        saveUninitialized: false, resave: false
+    }) );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
