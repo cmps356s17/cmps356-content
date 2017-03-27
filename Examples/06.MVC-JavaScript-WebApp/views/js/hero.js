@@ -71,15 +71,17 @@ async function updateHero(heroId) {
         document.querySelector('#hero-form').innerHTML = formTemplate(hero)
 
         //Strange - if I do not do this then the form title is not shown
-        $('#hero-form').iziModal('destroy');
+        console.log($('#hero-form').iziModal('getState'))
+
+        $('#hero-form').iziModal('destroy')
         $("#hero-form").iziModal({
             title: "Update Hero",
             icon: 'icon-chat',
             iconColor: 'white',
             width: 600,
             padding: 20,
-        });
-        $("#hero-form").iziModal('open');
+        })
+        $("#hero-form").iziModal('open')
 
 
         //Select the heroType in the Dropdown
@@ -100,15 +102,15 @@ function addHero() {
 
     //Show form as model poup form
     //Strange - if I do not do this then the form title is not shown
-    $('#hero-form').iziModal('destroy');
+    $('#hero-form').iziModal('destroy')
     $("#hero-form").iziModal({
         title: "Add Hero",
         icon: 'icon-chat',
         iconColor: 'white',
         width: 600,
         padding: 20,
-    });
-    $("#hero-form").iziModal('open');
+    })
+    $("#hero-form").iziModal('open')
 }
 
 async function deleteHero(heroId) {
