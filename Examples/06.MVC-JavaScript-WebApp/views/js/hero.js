@@ -64,15 +64,13 @@ async function updateHero(heroId) {
     console.log("heroId", heroId)
     try {
         const hero = await fetchHero(heroId)
-        console.log(hero)
+        //console.log(hero)
 
         const formTemplate = Handlebars.compile(heroFormTemplate)
 
         document.querySelector('#hero-form').innerHTML = formTemplate(hero)
 
         //Strange - if I do not do this then the form title is not shown
-        console.log($('#hero-form').iziModal('getState'))
-
         $('#hero-form').iziModal('destroy')
         $("#hero-form").iziModal({
             title: "Update Hero",
@@ -88,7 +86,7 @@ async function updateHero(heroId) {
         //$('#heroType').val(hero.heroType)
         //Select the current heroType in the heroType dropdown
         document.querySelector(`#heroType option[value="${hero.heroType}"]`).selected = true
-        console.log(document.querySelector('#heroType').value )
+        //console.log(document.querySelector('#heroType').value )
     }
     catch (err) {
         console.log(err)
