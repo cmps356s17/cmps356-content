@@ -18,20 +18,23 @@ const heroTemplate = `
 </table>`
 
 const heroFormTemplate = `
+    <header class="dialog-header">
+        <h1>{{dialogTitle}}</h1>
+    </header>
     <form method="post" action="/heroes">
-        <input type="hidden" id="heroId" name="id" value="{{id}}">
+        <input type="hidden" id="heroId" name="id" value="{{hero.id}}">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{name}}" required>
+            <input type="text" class="form-control" id="name" name="name" value="{{hero.name}}" required>
         </div>
         <div class="form-group">
             <label for="quote">Quote</label>
             <input type="text" class="form-control" id="quote" name="quote"
-        value="{{quote}}" required>
+        value="{{hero.quote}}" required>
         </div>
         <div class="form-group">
             <label for="heroType">Hero Type</label>
-            <select class="form-control" id="heroType" name="heroType" required>
+            <select class="form-control" id="heroType" name="heroType" required ">
                 <option value=""></option>
                 <option value="Prophet">Prophet</option>
                 <option value="Companion">Companion</option>
@@ -40,7 +43,7 @@ const heroFormTemplate = `
         </div>
         <input type="submit" class="btn btn-primary">
               
-        <button data-izimodal-close="" class="btn btn-primary">Cancel</button>
+        <input type="button" class="btn btn-primary" formnovalidate onclick="closeDialog()" value="Cancel">
     </form>`
 
 async function displayHero(heroId) {
@@ -66,24 +69,16 @@ async function updateHero(heroId) {
         const hero = await fetchHero(heroId)
         //console.log(hero)
 
+        //Convert the form template to a function
         const formTemplate = Handlebars.compile(heroFormTemplate)
 
-        document.querySelector('#hero-form').innerHTML = formTemplate(hero)
+        let dialogTitle = "Update Hero"
+        let heroDialog = document.querySelector('#hero-dialog')
+        heroDialog.innerHTML = formTemplate({hero, dialogTitle})
 
-        //Strange - if I do not do this then the form title is not shown
-        $('#hero-form').iziModal('destroy')
-        $("#hero-form").iziModal({
-            title: "Update Hero",
-            icon: 'icon-chat',
-            iconColor: 'white',
-            width: 600,
-            padding: 20,
-        })
-        $("#hero-form").iziModal('open')
+        heroDialog.showModal()
 
-
-        //Select the heroType in the Dropdown
-        //$('#heroType').val(hero.heroType)
+        //$('#heroType').val(hero.heroType) // using jQuery
         //Select the current heroType in the heroType dropdown
         document.querySelector(`#heroType option[value="${hero.heroType}"]`).selected = true
         //console.log(document.querySelector('#heroType').value )
@@ -94,21 +89,18 @@ async function updateHero(heroId) {
 }
 
 function addHero() {
-    let formTemplate = Handlebars.compile(heroFormTemplate)
+    //Convert the form template to a function
+    const formTemplate = Handlebars.compile(heroFormTemplate)
 
-    document.querySelector('#hero-form').innerHTML = formTemplate({})
+    let dialogTitle = "Add Hero"
+    let heroDialog = document.querySelector('#hero-dialog')
+    heroDialog.innerHTML = formTemplate({ dialogTitle })
 
-    //Show form as model poup form
-    //Strange - if I do not do this then the form title is not shown
-    $('#hero-form').iziModal('destroy')
-    $("#hero-form").iziModal({
-        title: "Add Hero",
-        icon: 'icon-chat',
-        iconColor: 'white',
-        width: 600,
-        padding: 20,
-    })
-    $("#hero-form").iziModal('open')
+    heroDialog.showModal()
+}
+
+function closeDialog() {
+    document.querySelector('#hero-dialog').close()
 }
 
 async function deleteHero(heroId) {
@@ -132,10 +124,10 @@ async function deleteHero(heroId) {
         const heroesTable = document.querySelector(`#heroesTable tbody`)
         const trToDelete = heroesTable.querySelector(`tr[data-heroid="${heroId}"]`)
         heroesTable.removeChild(trToDelete)
-        
+
         console.log(trToDelete)
 
-        await fetch(url, { method: 'delete' })
+        await fetch(url, {method: 'delete'})
     }
     catch (err) {
         console.log(err)

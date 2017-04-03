@@ -2,11 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Session Management App</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <link rel="stylesheet" href="views/css/styles.css">
 
     <script>
         $(document).ready(function () {
@@ -23,27 +24,29 @@
 
 <body>
 
-<!--Only show the welcome message and the menu if the user already login -->
-{{#if session.user}}
-    <h1>Welcome {{session.user.name}}</h1>
-    <br>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <img alt="Brand" src="/img/cookie.gif" style="width: 40px; height: 40px">
-                <a class="navbar-brand" href="/home">SessionApp</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Home</a></li>
-                <li><a href="/hala">Hala</a></li>
-                <li><a href="/shop">Shopping</a></li>
-            </ul>
-            <p class="navbar-text navbar-right">
-                Welcome {{session.user.name}} (<a href="/logout" class="navbar-link">Logout</a>)
-            </p>
+<br>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img alt="Brand" src="/views/img/cookie.gif" style="width: 40px; height: 40px">
+            <a class="navbar-brand" href="/home">SessionApp</a>
         </div>
-    </nav>
-{{/if}}
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/home">Home</a></li>
+            <li><a href="/hala">Hala</a></li>
+            <li><a href="/shop">Shopping</a></li>
+
+            <li><a href="/shopls">Shopping (localStorage)</a></li>
+        </ul>
+
+        <!--Only show the welcome message and the menu if the user already login -->
+        {{#if session.user}}
+            <p class="navbar-text navbar-right">
+                Welcome {{session.user.firstname}} {{session.user.lastname}} (<a href="/logout" class="navbar-link">Logout</a>)
+            </p>
+        {{/if}}
+    </div>
+</nav>
 
 {{{body}}}
 

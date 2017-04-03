@@ -1,12 +1,13 @@
 {
-  "name": "Node-Express4-Session",
-  "version": "0.0.1",
-  "main": "server.js",
+  "name": "Session-Management",
+  "version": "0.0.2017",
+  "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.7.0",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.8.7",
-    "express-handlebars": "^3.0.0",
-    "express-session": "latest"
+    "body-parser": "latest",
+    "cookie-parser": "latest",
+    "express": "latest",
+    "express-handlebars": "latest",
+    "express-session": "latest",
+    "fs-promise": "latest"
   }
 }

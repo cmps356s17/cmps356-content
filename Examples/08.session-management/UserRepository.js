@@ -1,27 +1,23 @@
-'use strict'
-
 class UserRepository {
+
     constructor() {
-        this.utils = require('./Utils');
+        this.fs = require('fs-promise')
     }
 
-    login(userCredentials) {
-        return this.utils.readJsonFile('./data/users.json').then(users => {
-            users = users.filter(s => s.username === userCredentials.username && s.password === userCredentials.password);
-            if (users.length > 0) {
-                let user = {
-                    id: users[0].userId,
-                    username: users[0].username,
-                    name: `${users[0].firstname} ${users[0].lastname}`,
-                    redirectTo: '/home'
-                };
-                return user;
-            }
-            else {
-                throw "Username and/or password invalid";
-            }
-        });
+    async login(username, password) {
+        const data = await this.fs.readFile('data/users.json')
+        const users = JSON.parse(data)
+
+        let user = users.find(u => u.username === username && u.password === password)
+        if (user != "undefined") {
+            //Do not return the user password, remove it
+            delete user.password
+            return user
+        }
+        else {
+            throw "Username and/or password invalid"
+        }
     }
 }
 
-module.exports = new UserRepository();
+module.exports = new UserRepository()
