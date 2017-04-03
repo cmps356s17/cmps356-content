@@ -1,22 +1,28 @@
-$(document).ready(function () {
-    let cookies = document.cookie
-    let accessCount = getCookie('accessCount')
-    console.log('accessCount', accessCount)
-    if (accessCount <= 3) {
-        $('#halaDiv').show()
+document.addEventListener("DOMContentLoaded", function () {
+    let visitCount = getCookie('visitCount')
+    console.log('visitCount', visitCount)
+    if (visitCount <= 3) {
+        document.querySelector('#halaDiv').style.display = ''
     } else {
-        $('#noHalaDiv').show()
+        document.querySelector('#noHalaDiv').style.display = ''
     }
-    $('.visitCount').html(accessCount)
+
+    //Display the visit counts in the spans having visitCount class
+    const elements = document.querySelectorAll('.visitCount')
+    for(let e of elements) {
+         e.innerText = visitCount
+    }
 })
 
 function getCookie(cookieName) {
+    console.log(document.cookie)
+
     let cookies = document.cookie.split(';')
     for(let cookie of cookies) {
 
-        let cookieArray = cookie.split('=')
-        let cname = cookieArray[0].trim()
-        let cvalue = cookieArray[1].trim()
+        const cookieArray = cookie.split('=')
+        const cname = cookieArray[0].trim()
+        const cvalue = cookieArray[1].trim()
 
         if ( cookieName === cname ) {
             return cvalue

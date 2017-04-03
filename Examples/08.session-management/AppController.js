@@ -19,17 +19,17 @@ class AppController {
     }
 
     hala(req, res) {
-        console.log('req.cookies.accessCount', req.cookies.accessCount)
-        //If there is already an accessCount cookie then increment its value
-        let accessCount = 1
-        if (req.cookies.accessCount) {
-            accessCount = parseInt(req.cookies.accessCount)
-            accessCount++
+        console.log('req.cookies.visitCount', req.cookies.visitCount)
+        //If there is already an visitCount cookie then increment its value
+        let visitCount = 1
+        if (req.cookies.visitCount) {
+            visitCount = parseInt(req.cookies.visitCount)
+            visitCount++
         }
 
-        //Return an accessCount cookie to the client -- expires is optional
+        //Return an visitCount cookie to the client -- expires is optional
         let expiresAfterMilliseconds = 1 * 360 * 1000  //1 hour
-        res.cookie('accessCount', accessCount, { expires: new Date(Date.now() + expiresAfterMilliseconds ) })
+        res.cookie('visitCount', visitCount, { expires: new Date(Date.now() + expiresAfterMilliseconds ) })
         res.render('hala')
     }
 
