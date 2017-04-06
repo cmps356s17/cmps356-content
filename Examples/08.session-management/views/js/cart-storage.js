@@ -10,12 +10,6 @@ function SaveItem() {
 
 }
 
-/*function ModifyItem() {
-    let name = document.querySelector("#productName").value
-    document.querySelector("#quantity").value = localStorage.getItem(name)
-    displayCart()
-}*/
-
 function RemoveItem() {
     let name = document.querySelector("#productName").value
     localStorage.removeItem(name)
@@ -28,8 +22,6 @@ function ClearAll() {
     localStorage.clear()
     displayCart()
 }
-
-// dynamically draw the table
 
 function displayCart() {
     let list = "<tr><th>Name</th><th>Quantity</th></tr>\n"
