@@ -1,57 +1,13 @@
-{{#if students}}
-    <caption for="studentsDD">Select a student:</caption>
-    <select id="studentsDD">
-        <option value=""></option>
-        {{#each students}}
-            <option value="{{studentId}}"> {{studentId}} - {{firstname}} {{lastname}}</option>
-        {{/each}}
-    </select>
-{{/if}}
+<caption for="studentsDD">Select a student:</caption>
+<select id="studentsDD">
+    <option value=""></option>
+    {{#students}}
+        <option value="{{studentId}}"> {{studentId}} - {{firstname}} {{lastname}}</option>
+    {{/students}}
+</select>
+
+<br><br>
 
 <div id="studentDetails"></div>
 
 <script src="views/js/student.js"></script>
-
-<!--
-<script id="student-template" type="text/x-handlebars-template">
-    <table border="1">
-        <tbody>
-        <tr>
-            <td>StudentId</td>
-            <td>{{studentId}}</td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>{{firstname}} {{lastname}}</td>
-        </tr>
-        <tr>
-            <td>Gender</td>
-            <td>{{gender}}</td>
-        </tr>
-        <tr>
-            <td>Program</td>
-            <td>{{program}}</td>
-        </tr>
-        <tr>
-            <td>GPA</td>
-            <td>{{gpa}}</td>
-        </tr>
-        <tr>
-            <td>Course Ids</td>
-            <td>{{courseIds}}</td>
-        </tr>
-
-        <tr>
-            <td>Courses</td>
-            <td>
-                <ul>
-                    {{#each courses}}
-                        <li>{{courseCode}} - {{courseName}} by {{instructor.firstname}} {{instructor.lastname}}</li>
-                    {{/each}}
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</script>
--->

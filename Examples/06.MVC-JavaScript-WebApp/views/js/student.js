@@ -1,4 +1,4 @@
-let htmlTemplate =`
+const studentTemplate =`
     <h4>Selected Student:</h4>
     <table class="table table-striped">
         <tbody>
@@ -41,103 +41,38 @@ let htmlTemplate =`
     </table>
 `
 
-
-//When the document is loaded in the browser then fill the students dropdown.
-$(document).ready( () => {
-    /*    getStudents().then(students => fillStudentsDD(students))
-        .catch(err => console.log(err))*/
-
-    $("#studentsDD").on('change', onStudentChange)
+//When the document is loaded in the browser then listen to studentsDD on change event
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("js-DOM fully loaded and parsed");
+    document.querySelector('#studentsDD').addEventListener("change", onStudentChange)
 })
 
 async function getStudent(studentId) {
-    let url = `/api/students/${studentId}`
-    let response = await fetch(url)
+    const url = `/api/students/${studentId}`
+    const response = await fetch(url)
     return await response.json()
 }
 
-async function onStudentChange() {
-    let selectedStudentId = $(this).val()
+async function onStudentChange(e) {
+    //this refers to the html element that raised the event (i.e., studentsDD element)
+    const selectedStudentId = this.value
+
     if (selectedStudentId == "") {
-        $('#studentDetails').empty()
+        //Empty the student details div
+        document.querySelector('#studentDetails').innerHTML = ''
         return
     }
 
     console.log("onStudentChange.selectedStudentId:", selectedStudentId)
 
     try {
-        let student = await getStudent(selectedStudentId)
-        displayStudent(student)
+        const student = await getStudent(selectedStudentId)
+        const htmlTemplate = Handlebars.compile(studentTemplate)
+        const htmlContent = htmlTemplate(student)
+
+        document.querySelector('#studentDetails').innerHTML = htmlContent
     }
     catch (err) {
         console.log(err)
     }
 }
-
-function displayStudent(student) {
-
-    //let htmlTemplate = $('#student-template').html(),
-    let studentTemplate = Handlebars.compile(htmlTemplate)
-    let htmlContent = studentTemplate(student)
-
-    //console.log('studentTemplate(student)', htmlContent)
-
-    $('#studentDetails').html(htmlContent)
-}
-    //Much better to use a UI template to generate the UI
-    //This will be ignored!!
-    /*
-    let studentTable = $("#studentTable")
-    studentTable.empty()
-
-    let row = $('<tr/>')
-    row.append($('<td/>').html('StudentId'))
-    row.append($('<td/>').html(student.studentId))
-    studentTable.append(row)
-
-    row = $('<tr/>')
-    row.append($('<td/>').html('Name'))
-    row.append($('<td/>').html(`${student.firstname} ${student.lastname}`))
-    studentTable.append(row)
-
-    row = $('<tr/>')
-    row.append($('<td/>').html('Gender'))
-    row.append($('<td/>').html(student.gender))
-    studentTable.append(row)
-
-    row = $('<tr/>')
-    row.append($('<td/>').html('Program'))
-    row.append($('<td/>').html(student.program))
-    studentTable.append(row)
-
-    row = $('<tr/>')
-    row.append($('<td/>').html('GPA'))
-    row.append($('<td/>').html(student.gpa))
-    studentTable.append(row)
-
-    
-    row = $('<tr/>')
-    row.append($('<td/>').html('Courses'))
-    //row.append($('<td/>').html(student.courseIds.join(', ')))
-    console.log("student.courses: ", student.courses)
-    let coursesStr = student.courses.map(c => `${c.courseName} by ${c.instructor.firstname}`).join('<br>')
-    row.append($('<td/>').html(coursesStr))
-    studentTable.append(row)
-    */   
-
-
-/*
-function getStudents() {
- let url = "/api/students"
- return fetch(url).then(response => response.json())
- }
-
-function fillStudentsDD(students) {
-    for(let student of students) {
-        $("<option>", {
-            value: student.studentId,
-            text: student.name
-        }).appendTo($("#studentsDD"))
-    }
-}
-*/

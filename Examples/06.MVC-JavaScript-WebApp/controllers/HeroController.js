@@ -27,9 +27,10 @@ class HeroController {
             hero = await this.heroRepository.addHero(hero)
             const urlOfNewHero = `/api/heroes/${hero.id}`
             res.location(urlOfNewHero)
-            res.status(201)
+            res.status(201).send("created")
         }
         catch (err) {
+            console.log(err)
             res.status(500).send(err)
         }
     }
@@ -39,7 +40,7 @@ class HeroController {
             const hero = req.body
 
             await this.heroRepository.updateHero(hero)
-            res.status(200)
+            res.status(200).send("ok")
         }
         catch (err) {
             res.status(500).send(err)
@@ -51,7 +52,7 @@ class HeroController {
             const heroId = req.params.id
 
             await this.heroRepository.deleteHero(heroId)
-            res.status(200)
+            res.status(200).send("ok")
         }
         catch (err) {
             res.status(500).send(err)
@@ -59,10 +60,23 @@ class HeroController {
     }
 
     async index (req, res) {
-/*        const userInfo = req.body
-        console.log("heroController.index.req.body", userInfo)*/
         const heroes = await this.heroRepository.getHeroes()
-        res.render('hero', { heroes })
+
+        res.render('heroes', {heroes})
+    }
+
+    async heroForm (req, res) {
+        const heroId = req.params.id
+        let hero;
+
+        console.log("heroForm.heroId", heroId)
+
+        //If heroId is not equal to new and if it is a number then get the hero to pass it to the template
+        if (heroId != 'new' && !isNaN(parseInt(heroId)) ) {
+            hero = await this.heroRepository.getHero( parseInt(heroId) )
+        }
+
+        res.render('hero-form', hero )
     }
 
     async postHero(req, res) {
@@ -78,6 +92,7 @@ class HeroController {
             res.redirect("/heroes")
         }
         catch (err) {
+            console.log(err)
             res.status(500).send(err)
         }
     }

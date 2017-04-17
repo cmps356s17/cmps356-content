@@ -25,7 +25,7 @@ class StudentController {
 
     async index (req, res) {
         let students = await this.studentRepository.getStudents()
-        res.render('student', { students })
+        res.render('student', { students, profs })
     }
 }
 

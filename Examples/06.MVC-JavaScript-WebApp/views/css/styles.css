@@ -20,3 +20,18 @@ input:invalid {
 input:valid {
     border: 1px solid green;
 }
+
+dialog {
+    width: 600px;
+    font-family:sans-serif;
+    padding: 5px 10px 20px 20px;
+}
+
+.dialog-header {
+    padding: 5px 5px;
+    background-color: #434a54;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}

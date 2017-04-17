@@ -2,12 +2,12 @@ let fs = require('fs-promise');
 let fetch = require("node-fetch");
 
 let fetchProgram = () => {
-    let url = "https://cmps356s17.github.io/data/ceng-program.json";
+    let url = "https://cmps356s17.github.io/data/ceng-programs.json";
     return fetch(url).then(response => response.json());
 }
 
 let readProgram = () => {
-    return fs.readFile('data/cas-program.json').then( data => JSON.parse(data) );
+    return fs.readFile('data/cas-programs.json').then( data => JSON.parse(data) );
 }
 
 Promise.all([fetchProgram(), readProgram()]).then( programs => {

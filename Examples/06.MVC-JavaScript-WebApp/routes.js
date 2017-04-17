@@ -1,9 +1,20 @@
 let express = require('express')
 
 let router = express.Router()
+const fs = require("fs-promise")
 
 let studentController = require('./controllers/StudentController')
 let heroController = require('./controllers/HeroController')
+
+//Example route with multiple parameters
+//Request example: authors/erradi/books/1234678
+router.get('/api/authors/:author/books/:isbn', (req, res) => {
+    console.log(req.params.author)
+    console.log(req.params.isbn)
+
+    //This returns the received parameters as a json object
+    res.json(req.params)
+})
 
 // Students Web API
 router.get('/api/students', (req, res) => studentController.getStudents (req, res) )
@@ -29,7 +40,8 @@ router.route('/login')
         console.log("router.post.req.body", userInfo)
 
         //Return an accessCount cookie to the client -- expires is optional
-        res.cookie('username', userInfo.username, { expires: new Date(Date.now() + 1000 * 360 * 1) })
+        const duration24H = 24*60*60*1000
+        res.cookie('username', userInfo.username, { expires: new Date(Date.now() + duration24H) })
         res.redirect('/')
     })
 
@@ -41,13 +53,13 @@ router.get('/logout', (req, res) => {
 
 //Middleware to intercept requests and redirect to the login page if the user is not logged-in
 router.use( (req, res, next) => {
-    const username = req.cookies.username
-    console.log("isAuthenticated.username", username)
-
-    if (!username) {
+    if (!req.cookies.username) {
         res.redirect("/login")
     }
     else {
+        const username = req.cookies.username
+        console.log("isAuthenticated.username", username)
+
         //Allows accessing username variable from handlebars template
         res.locals.username = username
         return next()
@@ -59,6 +71,8 @@ router.get('/students', (req, res) => studentController.index(req, res) )
 router.route('/heroes')
     .get( (req, res) => heroController.index(req, res) )
     .post( (req, res) => heroController.postHero(req, res) )
+
+router.get('/heroes/:id', (req, res) => heroController.heroForm(req, res) )
 
 module.exports = router
 
