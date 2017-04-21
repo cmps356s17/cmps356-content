@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Comment</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Add Comment</h2>
+    <br>
+    <form>
+        <div class="form-group">
+            <label class="control-label" for="crn">Course</label>
+            <!-- This dropdown options should be dynamically populated using courses data -->
+            <select id="crn" name="crn" required>
+                <option value=""></option>
+                <option value="cmps151">CMPS 151 - Computer Programming</option>
+                <option value="cmps411">CMPS 411 - Software Engineering</option>
+                <option value="cmpe264">CMPE 246 - Digital Logic Design</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group" >
+            <label class="control-label" for="body">Comment</label>
+            <textarea class="form-control" id="body" name="body" required></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+</body>
+</html>

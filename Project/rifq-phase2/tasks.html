@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+
+<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add Task</button>
+<br><br>
+
+Select a course:
+<select id="courses">
+    <option value="">All</option>
+    <option value="cmps151">CMPS 151 - Computer Programming</option>
+    <option value="cmps411">CMPS 411 - Software Engineering</option>
+    <option value="cmpe264">CMPE 246 - Digital Logic Design</option>
+</select>
+
+<br><br>
+<table class="table table-striped table-bordered dataTable">
+    <thead>
+    <tr>
+        <th>Course</th>
+        <th>Task Type</th>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Effort Hours</th>
+        <th>Weight</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>CMPS 411 - Software Engineering</td>
+        <td>Homework</td>
+        <td>Homework 1</td>
+        <td>17/4/2015</td>
+        <td>2</td>
+        <td>5%</td>
+        <td>
+            <a class="btn btn-sm btn-primary" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+            <a class="btn btn-sm btn-danger" title="delete"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+    <tr>
+        <td>CMPS 411 - Software Engineering</td>
+        <td>Midterm</td>
+        <td>Midterm 1</td>
+        <td>5/2/2016</td>
+        <td>5</td>
+        <td>25%</td>
+        <td>
+            <a class="btn btn-sm btn-primary"  title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+            <a class="btn btn-sm btn-danger" title="delete"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+    <tr>
+        <td>CMPS 411 - Software Engineering</td>
+        <td>Quiz</td>
+        <td>Quiz 1</td>
+        <td>16/01/2017</td>
+        <td>0.5</td>
+        <td>4%</td>
+        <td>
+            <a class="btn btn-sm btn-primary" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+            <a class="btn btn-sm btn-danger" title="delete"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+    <tr>
+        <td>CMPS 411 - Software Engineering</td>
+        <td>Project</td>
+        <td>Project phase 1</td>
+        <td>12/03/2017</td>
+        <td>6</td>
+        <td>6%</td>
+        <td>
+            <a class="btn btn-sm btn-primary" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+            <a class="btn btn-sm btn-danger" title="delete"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

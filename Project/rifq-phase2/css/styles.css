@@ -1,0 +1,9 @@
+.chart {
+    width: 80%;
+    height: 500px;
+    margin: auto;
+}
+
+th{
+    text-align: center;
+}
