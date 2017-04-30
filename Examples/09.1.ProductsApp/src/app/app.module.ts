@@ -8,6 +8,7 @@ import { WelcomeComponent } from './home/welcome.component';
 
 /* Feature Modules */
 import { ProductModule } from './products/product.module';
+import { ProductEditorComponent } from "./products/product-editor.component"
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ProductModule } from './products/product.module';
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
     ]),
     ProductModule
   ],

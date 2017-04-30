@@ -9,15 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var Observable_1 = require("rxjs/Observable");
-require("rxjs/add/operator/do");
-require("rxjs/add/operator/catch");
-require("rxjs/add/operator/map");
-require("rxjs/add/observable/throw");
 var ProductService = (function () {
-    function ProductService(_http) {
-        this._http = _http;
+    function ProductService() {
         this.productUrl = 'api/products/products.json';
     }
     ProductService.prototype.getProducts = function () {
@@ -28,17 +21,11 @@ var ProductService = (function () {
             return products.find(function (p) { return p.productId === id; });
         });
     };
-    ProductService.prototype.handleError = function (error) {
-        // in a real world app, we may send the server to some remote logging infrastructure
-        // instead of just logging it to the console
-        console.error(error);
-        return Observable_1.Observable.throw(error.json().error || 'Server error');
-    };
     return ProductService;
 }());
 ProductService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [])
 ], ProductService);
 exports.ProductService = ProductService;
 //# sourceMappingURL=product.service.js.map

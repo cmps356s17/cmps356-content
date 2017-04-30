@@ -33,7 +33,7 @@ __decorate([
 ], StarComponent.prototype, "ratingClicked", void 0);
 StarComponent = __decorate([
     core_1.Component({
-        selector: 'ai-star',
+        selector: 'rating2stars',
         templateUrl: 'app/shared/star.component.html',
         styleUrls: ['app/shared/star.component.css']
     })

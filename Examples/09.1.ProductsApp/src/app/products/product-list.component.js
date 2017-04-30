@@ -14,7 +14,6 @@ var ProductListComponent = (function () {
     function ProductListComponent(productService) {
         this.productService = productService;
         this.pageTitle = 'Products';
-        this.listFilter = "Saw";
         this.imageWidth = 50;
         this.imageMargin = 2;
         this.showImage = true;
