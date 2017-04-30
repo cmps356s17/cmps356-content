@@ -6,8 +6,10 @@ const fs = require("fs-promise")
 let studentController = require('./controllers/StudentController')
 let heroController = require('./controllers/HeroController')
 
+router.get("/api/heroes2", (req, res) => heroController.getHeroes(req, res))
+
 //Example route with multiple parameters
-//Request example: authors/erradi/books/1234678
+//Request example: authors/erradi/books/1234678g
 router.get('/api/authors/:author/books/:isbn', (req, res) => {
     console.log(req.params.author)
     console.log(req.params.isbn)
