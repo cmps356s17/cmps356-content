@@ -2,8 +2,8 @@
     <div class='panel-heading'>
         {{pageTitle}}
     </div>
-
-    <button (click)="changeFilter()">Change Filter</button>
+    <a [routerLink]="['/prodeditor']">Add Product</a>
+    <!--<button (click)="changeFilter()">Change Filter</button>-->
     <!-- Filter the Products   -->
     <div class='panel-body'>
         <div class='row'>
@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let product of products | productFilter:listFilter'>
+                    <tr *ngFor='let product of products | productsFilter:listFilter'>
                         <td>
                             <img *ngIf='showImage'
                                  [src]='product.imageUrl'
@@ -59,6 +59,14 @@
                                     (ratingClicked)='onRatingClicked($event)'>
                             </rating2stars>
                        </td>
+                            <td><a [routerLink]="['/prodeditor', product.productId]">
+                                edit
+                            </a>
+                        </td>
+                        <td><a href="/prodeditor/{{product.productId}}">
+                            update
+                        </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

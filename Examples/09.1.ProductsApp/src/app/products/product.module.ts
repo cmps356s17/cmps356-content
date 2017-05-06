@@ -19,10 +19,7 @@ import {ProductEditorComponent} from "./product-editor.component";
       { path: 'products', component: ProductListComponent },
       { path: 'prodeditor', component: ProductEditorComponent },
       { path: 'prodeditor/:id', component: ProductEditorComponent },
-      { path: 'product/:id',
-        canActivate: [ ProductDetailGuard],
-        component: ProductDetailComponent
-      }
+      { path: 'product/:id',  component: ProductDetailComponent }
     ]),
     FormsModule
   ],

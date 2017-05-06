@@ -24,7 +24,6 @@ export class ProductListComponent implements OnInit {
     }
 
     constructor(private productService: ProductService) {
-
     }
 
     toggleImage(): void {
@@ -32,7 +31,7 @@ export class ProductListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.productService.getProducts().then(products => {
+        this.productService.getProducts().then(products  => {
             this.products = products;
         }).catch(err => {
             this.errorMessage = err;

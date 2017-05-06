@@ -1,0 +1,16 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading' style='font-size:large'>
+        {{pageTitle}}
+    </div>
+    <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+    <form (ngSubmit)="onSubmit()" ngForm *ngIf='product'>
+        <!--<div>ProductId:    <input type="text" name="productId"     [(ngModel)]="product.productId"   required></div>-->
+        <div>Name:         <input type="text" name="productName"   [(ngModel)]="product.productName" required></div>
+        <div>Price:        <input type="text" name="price"         [(ngModel)]="product.price"       required></div>
+        <div>Description:  <input type="text" name="description"   [(ngModel)]="product.description" required></div>
+        <div>Release Date: <input type="text" name="releaseDate"   [(ngModel)]="product.releaseDate" required></div>
+        <div>Star Rating:  <input type="text" name="starRating"   [(ngModel)]="product.starRating" required></div>
+        <div>Image Url:    <input type="text" name="imageUrl"   [(ngModel)]="product.imageUrl" required></div>
+        <button type="submit">Submit</button>
+    </form>
+</div>

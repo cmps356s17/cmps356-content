@@ -16,38 +16,46 @@ var ProductEditorComponent = (function () {
         this.router = router;
         this.route = route;
         this.productService = productService;
-        this.product = {
-            productId: 0,
-            productName: 'Test',
-            productCode: '123',
-            releaseDate: '',
-            price: 10,
-            description: '',
-            starRating: 0,
-            imageUrl: ''
-        };
+        this.pageTitle = 'Product Editor';
     }
     ProductEditorComponent.prototype.ngOnInit = function () {
-        /*    this.sub = this.route.params.subscribe(
-                params => {
-                  console.log("Params", params);
-                  if (params == {}) {
-                    return;
-                  }
-                  let id = +params['id'];
-                  this.getProduct(id);
-                });*/
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            console.log("Params", params);
+            //If id parameter is passed in the route
+            if (params['id']) {
+                _this.mode = "Update";
+                var id = +params['id'];
+                _this.getProduct(id);
+            }
+            else {
+                _this.mode = "Add";
+                _this.product = {
+                    productId: 0,
+                    productName: 'Test',
+                    productCode: '123',
+                    releaseDate: '',
+                    price: 10,
+                    description: '',
+                    starRating: 0,
+                    imageUrl: ''
+                };
+            }
+        });
     };
     ProductEditorComponent.prototype.ngOnDestroy = function () {
-        //this.sub.unsubscribe();
+        this.sub.unsubscribe();
     };
     ProductEditorComponent.prototype.onSubmit = function () {
+        this.mode;
+        this.product.productId;
         console.log(this.product);
     };
     ProductEditorComponent.prototype.getProduct = function (id) {
         var _this = this;
         this.productService.getProduct(id).then(function (product) {
             _this.product = product;
+            console.log("product", product);
         }).catch(function (err) {
             _this.errorMessage = err;
         });
@@ -57,7 +65,7 @@ var ProductEditorComponent = (function () {
 ProductEditorComponent = __decorate([
     core_1.Component({
         selector: 'product-editor',
-        template: "\n    <form (ngSubmit)=\"onSubmit()\" #productForm=\"ngForm\">\n      <div>ProductId:   <input type=\"text\" name=\"productId\"     [(ngModel)]=\"product.productId\"   required></div>\n      <div>Name:        <input type=\"text\" name=\"productName\"   [(ngModel)]=\"product.productName\" required></div>\n      <div>Price:       <input type=\"text\" name=\"price\"         [(ngModel)]=\"product.price\"       required></div>\n      <div>Description: <input type=\"text\" name=\"description\"   [(ngModel)]=\"product.description\" required></div>\n      <button type=\"submit\">Submit</button>\n    </form>\n  "
+        templateUrl: 'app/products/product-editor.component.html'
     }),
     __metadata("design:paramtypes", [router_1.Router, router_1.ActivatedRoute,
         product_service_1.ProductService])

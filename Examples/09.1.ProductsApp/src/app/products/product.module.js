@@ -28,10 +28,7 @@ ProductModule = __decorate([
                 { path: 'products', component: product_list_component_1.ProductListComponent },
                 { path: 'prodeditor', component: product_editor_component_1.ProductEditorComponent },
                 { path: 'prodeditor/:id', component: product_editor_component_1.ProductEditorComponent },
-                { path: 'product/:id',
-                    canActivate: [product_guard_service_1.ProductDetailGuard],
-                    component: product_detail_component_1.ProductDetailComponent
-                }
+                { path: 'product/:id', component: product_detail_component_1.ProductDetailComponent }
             ]),
             forms_1.FormsModule
         ],

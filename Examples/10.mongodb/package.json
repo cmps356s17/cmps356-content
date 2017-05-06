@@ -1,0 +1,12 @@
+{
+  "name": "10.mongodb",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "fs-promise": "^2.0.3",
+    "express": "^4.15.2",
+    "body-parser": "^1.17.1",
+    "mongoose": "^4.9.7"
+  }
+}

@@ -9,17 +9,21 @@ var core_1 = require("@angular/core");
 var ProductFilterPipe = (function () {
     function ProductFilterPipe() {
     }
-    ProductFilterPipe.prototype.transform = function (value, filterBy) {
-        filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
-        return filterBy ? value.filter(function (product) {
+    ProductFilterPipe.prototype.transform = function (products, filterBy) {
+        if (!filterBy) {
+            return products;
+        }
+        filterBy = filterBy.toLocaleLowerCase();
+        var filteredProducts = products.filter(function (product) {
             return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
-        }) : value;
+        });
+        return filteredProducts;
     };
     return ProductFilterPipe;
 }());
 ProductFilterPipe = __decorate([
     core_1.Pipe({
-        name: 'productFilter'
+        name: 'productsFilter'
     })
 ], ProductFilterPipe);
 exports.ProductFilterPipe = ProductFilterPipe;
