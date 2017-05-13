@@ -1,0 +1,152 @@
+package qu.oms.repository;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import qu.oms.entity.Customer;
+import qu.oms.entity.OrderSummary;
+
+public class CustomerJdbcRepository { //implements ICustomerRepository {
+
+	private String connectionURL = "jdbc:derby:memory:cmsdb;create=true";
+	
+	public CustomerJdbcRepository() {
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+    public Customer addCustomer(Customer customer) throws SQLException {
+        String insertQuery = "insert into Customer(customerName) values("
+                + customer.getName() + ")";
+        try (Connection dbConnection = DriverManager.getConnection(connectionURL);
+                Statement stmt = dbConnection.createStatement()) {
+
+            int customerId = stmt.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            customer.setId(customerId);
+        }
+        return customer;
+    }
+
+    public int updateCustomer(Customer customer) throws SQLException {
+        String updateQuery = "Update Customer set Name = '"
+                + customer.getName() + "' where id = "
+                + customer.getId();
+
+        System.out.println(updateQuery);
+        int numberOfAffectedRows = 0;
+        try (Connection dbConnection = DriverManager.getConnection(connectionURL);
+                Statement stmt = dbConnection.createStatement()) {
+
+            numberOfAffectedRows = stmt.executeUpdate(updateQuery);
+        }
+        return numberOfAffectedRows;
+    }
+
+    public int deleteCustomer(int id) throws SQLException {
+        String deleteQuery = "Delete from Customer where id = " + id;
+        int numberOfAffectedRows = 0;
+        try (Connection dbConnection = DriverManager.getConnection(connectionURL);
+                Statement stmt = dbConnection.createStatement()) {
+
+            numberOfAffectedRows = stmt.executeUpdate(deleteQuery);
+        } 
+        return numberOfAffectedRows;
+    }
+
+    public List<Customer> getCustomers() throws SQLException {
+        List<Customer> customers = new ArrayList<>();
+
+        try (Connection dbConnection = DriverManager.getConnection(connectionURL);
+                Statement stmt = dbConnection.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Customer")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("Name");
+                customers.add(new Customer(id, name));
+            }
+        }
+        return customers;
+    }
+
+    public Customer getCustomer(int id) throws SQLException {
+        Customer customer = null;
+        try (Connection dbConnection = DriverManager.getConnection(connectionURL);
+                Statement stmt = dbConnection.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Customer where id = " + id)) {
+
+            while (rs.next()) {
+                customer = new Customer(rs.getInt("Id"), rs.getString("Name"));
+                break;
+            }
+        }
+        return customer;
+    }
+
+    public List<OrderSummary> GetOrdersSummary() {
+
+        List<OrderSummary> orderSummaryList = new ArrayList<OrderSummary>();
+
+        try (Connection con = DriverManager.getConnection(connectionURL);
+                Statement stmt = con.createStatement()) {
+
+            // Create and execute an SQL statement that returns a
+            // set of data and then display it.
+            String sqlText = "Select C.NAME CustomerName, SUM(O.Qty) TotalQty from CUSTOMER C"
+                    + " join ORDERS O on C.ID = O.CUSTOMER_ID"
+                    + " Group by C.NAME";
+            
+            ResultSet rs = stmt.executeQuery(sqlText);
+
+            while (rs.next()) {
+                OrderSummary orderSummary = new OrderSummary(
+                        rs.getString("CustomerName"),
+                        s.getInt(("TotalQty"));
+                orderSummaryList.add(orderSummary);
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return orderSummaryList;
+    }
+
+    public OrderSummary GetOrdersSummary(int customerId) {
+        OrderSummary orderSummary = null;
+        String sqlText = "Select C.NAME CustomerName, SUM(O.Qty) TotalQty from CUSTOMER C"
+                + " join ORDERS O on C.ID = O.CUSTOMER_ID "
+                + " Where C.Id = ?"
+                + " Group by C.NAME";
+
+        try (Connection con = DriverManager.getConnection(connectionURL);
+                PreparedStatement stmt = con.prepareStatement(sqlText)) {
+
+            // Create and execute an SQL statement that returns a
+            // set of data and then display it.
+            stmt.setInt(1, customerId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                orderSummary = new OrderSummary(
+                        rs.getString("CustomerName"),
+                        (Long) rs.getLong("TotalQty"));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return orderSummary;
+    }
+}

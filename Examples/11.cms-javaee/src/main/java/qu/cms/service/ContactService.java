@@ -1,8 +1,8 @@
 package qu.cms.service;
 
-import com.google.gson.Gson;
 import java.net.URI;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,8 +13,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.google.gson.Gson;
+
 import qu.cms.entity.Contact;
-import qu.cms.repository.ContactRepository;
+import qu.cms.repository.ContactDBRepository;
 import qu.cms.repository.IContactRepository;
 
 @Path("/api/contacts")
@@ -23,7 +26,7 @@ public class ContactService {
     IContactRepository contactRepository;
     
     public ContactService() {
-    	this.contactRepository = new ContactRepository();
+    	this.contactRepository = new ContactDBRepository(); //ContactRepository();
     }
     
    
@@ -130,7 +133,19 @@ public class ContactService {
     }
     
     @GET
-    @Path("cities/{country}")
+    @Path("/countries")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getContries() {
+        List<String> countries = contactRepository.getCountries();
+        System.out.println("countries count " + countries.size());
+        //This is a workaround to serialize a list of strings to json 
+        Gson gson = new Gson();
+        String json = gson.toJson(countries);
+        return Response.ok(json).build();
+    }
+    
+    @GET
+    @Path("countries/{country}/cities")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCities(@PathParam("country") String countryCode) {
         System.out.println("ContactService.getCities(coutryCode) :" + countryCode);

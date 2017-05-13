@@ -1,155 +1,103 @@
 package qu.cms.repository;
 
-import com.google.gson.Gson;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import com.google.gson.Gson;
+
 import qu.cms.entity.Contact;
+import qu.utils.Utils;
 
 public class ContactDBRepository implements IContactRepository {
+	private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("CmsDbPu");
+	private EntityManager em;
 
-    private List<Contact> contacts;
-    private int lastContactId = 0;
-    private final String contactsUrl = "http://erradi.github.io/contacts.json";
+	public ContactDBRepository() {
+		em = entityManagerFactory.createEntityManager();
+		insertTestData();
+	}
     
     public List<Contact> getContacts() {
-        if (contacts != null) {
-            return contacts;
-        }
-        else {
-            insertTestData();
-            return contacts;
-        }
+		Query query = em.createQuery("select c from Contact as c");
+		return query.getResultList();
     }
 
     public Contact addContact(Contact contact) {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        contacts.add(contact);
-        contact.setId(++lastContactId);
-        return contact;
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.persist(contact);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			throw e;
+		}
+		return contact;
     }
     
     public void updateContact(Contact contact) {
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getId() == contact.getId()) {
-               contacts.set(i, contact);
-               break;
-            }
-        }
+    	EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			em.merge(contact);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			throw e;
+		}
     }
 
     public void deleteContact(int contactId) {
-        contacts.removeIf(c -> c.getId() == contactId);
-    }
+    	Query query = em.createQuery("delete from Contact where id = :contactId");
+    	query.setParameter("contactId", contactId);
 
+    	EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			query.executeUpdate(); 
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			throw e;
+		}
+    }
+        
     public Contact getContact(int id) {
-        if (contacts == null) {
-            insertTestData();
-        }
-        try  {
-        return contacts.stream().filter(c -> c.getId() == id).findFirst().get();
-        } catch (Exception ex) {
-            return null;
-        }
+        return em.find(Contact.class, id);
     }
 
     public int getContactsCount() {
-        return contacts == null ? 0 : contacts.size();
+        return ((Long) em.createQuery("select count(c) from Contact as c").getSingleResult()).intValue();
     }
-    
+
+   
     public void insertTestData() {
-        if (contacts != null && contacts.size() > 0) {
-            return;
-        }
-        
+       if (getContactsCount() > 0)
+			return;
+		
         Gson gson = new Gson();
-        String contactsStr = Utils.readUrl(contactsUrl);
+        String contactsStr = Utils.readUrl(Utils.contactsUrl);
         System.out.println(contactsStr);
 
         Contact[] contactArray = gson.fromJson(contactsStr, Contact[].class);
         //Convert the array to a editable list 
-        contacts = new ArrayList<>(Arrays.asList(contactArray));
-        lastContactId = contacts.size();
-        
-        /*
-        addContact(new Contact("Juha", "Dahak", "8888-9999", "7777-888", "juha@test.com", 
-                    new Address("5 Test St", "Doha", "Qatar")));
-        addContact(new Contact("Abbas", "Ibn Farnas", "6666-9999", "9999-888", "abbas@test.com", 
-                    new Address("50 Test St", "Doha", "Qatar")));
-        addContact(new Contact("Samir", "Saghir", "7777-9999", "9999-888", "samir@test.com", 
-            new Address("22 Aspire St", "Dubai", "UAE")));
-        addContact(new Contact("Jarir", "Bookstore", "3333-9999", "2222-888", "jarir@test.com", 
-            new Address("33 Salman St", "Jeddah", "Saudi")));
-        
-        //Gson gson = new Gson();
-        //System.out.println(gson.toJson(contacts));
-       */
-    }
-  
-    public List<String> getCities(String countryCode) {
-        List<String> cities = new ArrayList<String>();
-        switch (countryCode.toLowerCase()) {
-            case "qatar":
-                cities = Arrays.asList("Doha", "Al Khor", "Al Wakrah");
-                break;
-            case "palestine":
-                cities = Arrays.asList("Quds", "Gaza", "Khan Yunis");
-                break;
-            case "algeria":
-                cities = Arrays.asList("Algiers", "Oran", "Constantine");
-                break;
-            case "egypt":
-                cities = Arrays.asList("Cairo", "Alexandria", "Damanhur");
-                break;
-            case "sudan":
-                cities = Arrays.asList("Khartoum", "Wadi Halfa", "Taiyara");
-                break;
-            case "iraq":
-                cities = Arrays.asList("Baghdad", "Basra", "Faluja");
-                break;
-            case "morocco":
-                cities = Arrays.asList("Fes", "Casabalanca", "Rabat");
-                break;
-            case "saudi":
-                cities = Arrays.asList("Mecca", "Madina", "Jeddah");
-                break;
-            case "yeman":
-                cities = Arrays.asList("Sana'a", "Aden", "Taizz");
-                break;
-            case "syria":
-                cities = Arrays.asList("Damascus", "Aleppo", "Daraa");
-                break;
-            case "tunisia":
-                cities = Arrays.asList("Tunis", "Sfax", "Soussa");
-                break;
-            case "somalia":
-                cities = Arrays.asList("Mogadishu", "Merca", "Qandala");
-                break;
-            case "uae":
-                cities = Arrays.asList("Dubai", "Abu Dhabi", "Sharjha");
-                break;
-            case "lybia":
-                cities = Arrays.asList("Tripoli", "Benghazi", "Misrata");
-                break;
-            case "jordan":
-                cities = Arrays.asList("Amman", "Irbid", "Al-Aqaba");
-                break;
-            case "mauritania":
-                cities = Arrays.asList("Nouakchott", "Nouadhibou", "Rosso");
-                break;
-            case "oman":
-                cities = Arrays.asList("Muscat", "Nizwa", "Sohar");
-                break;
-            case "kuwait":
-                cities = Arrays.asList("Kuwait city", "Ahmed Al Jaber", "Al Abdaliyah");
-                break;
-            case "bahrain":
-                cities = Arrays.asList("Manama", "Riffa", "Muharraq");
-                break;
-        }
+        List<Contact> contacts = new ArrayList<>(Arrays.asList(contactArray));
 
-        return cities;
+        contacts.forEach(contact -> addContact(contact));
     }
+
+    public List<String> getCountries() {
+    	return Utils.getCountries();
+    }
+    
+    public List<String> getCities(String country) {
+    	return Utils.getCities(country);
+    }  
 }

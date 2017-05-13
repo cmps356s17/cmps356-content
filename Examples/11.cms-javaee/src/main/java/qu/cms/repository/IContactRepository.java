@@ -1,16 +1,13 @@
 package qu.cms.repository;
 
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import qu.cms.entity.Contact;
 
 public interface IContactRepository {
-
     Contact addContact(Contact contact);
 
     void deleteContact(int contactId);
-
-    List<String> getCities(String countryCode);
 
     Contact getContact(int id);
 
@@ -18,9 +15,11 @@ public interface IContactRepository {
 
     int getContactsCount();
 
-    @PostConstruct
+    //@PostLoad
     void insertTestData();
 
     void updateContact(Contact contact);
- 
+    
+    List<String> getCountries();
+    List<String> getCities(String country);
 }

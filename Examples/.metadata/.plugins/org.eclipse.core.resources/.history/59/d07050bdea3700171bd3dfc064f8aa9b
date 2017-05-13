@@ -1,0 +1,142 @@
+package qu.cms.repository;
+
+import com.google.gson.Gson;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import qu.cms.entity.Contact;
+import qu.utils.Utils;
+
+public class ContactRepository implements IContactRepository {
+
+    private List<Contact> contacts;
+    private int lastContactId = 0;
+    private final String contactsUrl = "http://erradi.github.io/contacts.json";
+    
+    public List<Contact> getContacts() {
+        if (contacts != null) {
+            return contacts;
+        }
+        else {
+            insertTestData();
+            return contacts;
+        }
+    }
+
+    public Contact addContact(Contact contact) {
+        if (contacts == null) {
+            contacts = new ArrayList<Contact>();
+        }
+        contacts.add(contact);
+        contact.setId(++lastContactId);
+        return contact;
+    }
+    
+    public void updateContact(Contact contact) {
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getId() == contact.getId()) {
+               contacts.set(i, contact);
+               break;
+            }
+        }
+    }
+
+    public void deleteContact(int contactId) {
+        contacts.removeIf(c -> c.getId() == contactId);
+    }
+
+    public Contact getContact(int id) {
+        if (contacts == null) {
+            insertTestData();
+        }
+        try  {
+        return contacts.stream().filter(c -> c.getId() == id).findFirst().get();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public int getContactsCount() {
+        return contacts == null ? 0 : contacts.size();
+    }
+    
+    public void insertTestData() {
+        if (contacts != null && contacts.size() > 0) {
+            return;
+        }
+        
+        Gson gson = new Gson();
+        String contactsStr = Utils.readUrl(contactsUrl);
+        System.out.println(contactsStr);
+
+        Contact[] contactArray = gson.fromJson(contactsStr, Contact[].class);
+        //Convert the array to a editable list 
+        contacts = new ArrayList<>(Arrays.asList(contactArray));
+        lastContactId = contacts.size();
+    }
+  
+    public List<String> getCities(String countryCode) {
+        List<String> cities = new ArrayList<String>();
+        switch (countryCode.toLowerCase()) {
+            case "qatar":
+                cities = Arrays.asList("Doha", "Al Khor", "Al Wakrah");
+                break;
+            case "palestine":
+                cities = Arrays.asList("Quds", "Gaza", "Khan Yunis");
+                break;
+            case "algeria":
+                cities = Arrays.asList("Algiers", "Oran", "Constantine");
+                break;
+            case "egypt":
+                cities = Arrays.asList("Cairo", "Alexandria", "Damanhur");
+                break;
+            case "sudan":
+                cities = Arrays.asList("Khartoum", "Wadi Halfa", "Taiyara");
+                break;
+            case "iraq":
+                cities = Arrays.asList("Baghdad", "Basra", "Faluja");
+                break;
+            case "morocco":
+                cities = Arrays.asList("Fes", "Casabalanca", "Rabat");
+                break;
+            case "saudi":
+                cities = Arrays.asList("Mecca", "Madina", "Jeddah");
+                break;
+            case "yeman":
+                cities = Arrays.asList("Sana'a", "Aden", "Taizz");
+                break;
+            case "syria":
+                cities = Arrays.asList("Damascus", "Aleppo", "Daraa");
+                break;
+            case "tunisia":
+                cities = Arrays.asList("Tunis", "Sfax", "Soussa");
+                break;
+            case "somalia":
+                cities = Arrays.asList("Mogadishu", "Merca", "Qandala");
+                break;
+            case "uae":
+                cities = Arrays.asList("Dubai", "Abu Dhabi", "Sharjha");
+                break;
+            case "lybia":
+                cities = Arrays.asList("Tripoli", "Benghazi", "Misrata");
+                break;
+            case "jordan":
+                cities = Arrays.asList("Amman", "Irbid", "Al-Aqaba");
+                break;
+            case "mauritania":
+                cities = Arrays.asList("Nouakchott", "Nouadhibou", "Rosso");
+                break;
+            case "oman":
+                cities = Arrays.asList("Muscat", "Nizwa", "Sohar");
+                break;
+            case "kuwait":
+                cities = Arrays.asList("Kuwait city", "Ahmed Al Jaber", "Al Abdaliyah");
+                break;
+            case "bahrain":
+                cities = Arrays.asList("Manama", "Riffa", "Muharraq");
+                break;
+        }
+
+        return cities;
+    }
+}
