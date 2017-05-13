@@ -1,0 +1,23 @@
+<h3>Tasks Section</h3>
+
+<div class="form-inline">
+    <caption>Select Course</caption>
+    <select class="form-control" onchange="getTasks(this.value)">
+      <option value="all">All Courses</option>
+        {{#courses}}
+            <option value="{{crn}}">{{code}} - {{name}}</option>
+        {{/courses}}
+    </select>
+</div>
+
+<br>
+{{#if user.IsFaculty}}
+    <input type="hidden" id="userType" value="instructor">
+    <a href="/courses/{{user.id}}/tasks" class="btn btn-success">Add Task</a>
+    <br><br>
+{{/if}}
+
+<div id="tasksDiv"></div>
+
+<script src="views/js/utils.js"></script>
+<script src="views/js/tasks.js"></script>

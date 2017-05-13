@@ -1,0 +1,20 @@
+<br>
+<div class="form-inline">
+  <caption>Select Course</caption>
+  <select onchange="getComments(this.value)" class="form-control">
+    <option value="all">All Courses</option>
+    {{#courses}}
+      <option value="{{crn}}">{{code}} - {{name}}</option>
+    {{/courses}}
+  </select>
+</div>
+
+<br>
+
+<a href="/courses/{{user.id}}/comments" class="btn btn-success">Add Comment</a>
+
+<br><br>
+<div id="commentsList"></div>
+
+<script src="/views/js/utils.js"></script>
+<script src="/views/js/comments.js"></script>

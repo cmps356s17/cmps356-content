@@ -1,0 +1,131 @@
+{{#if task.id}}
+  <h2>Update Task</h2>
+{{else}}
+  <h2>Add Task</h2>
+{{/if}}
+
+<br>
+
+<div id="alertBox" class="alert alert-danger fade in" style="display: none">
+  <a href="#" class="close" data-dismiss="alert">&times;</a>
+  <span id="errorMsg"></span>
+</div>
+
+<form action="/tasks" method="post" onsubmit="return validateForm();">
+  <input type="hidden" id="id" name="id" value="{{task.id}}">
+
+  <input type="hidden" id="crnBeforeUpdate" value="{{task.crn}}">
+  <input type="hidden" id="taskTypeBeforeUpdate" value="{{task.taskType}}">
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="crn">Course</label>
+    <select id="crn" name="crn" required onchange="getTaskTitle()">
+      <option value=""></option>
+      {{#courses}}
+        <option value="{{crn}}">{{code}} - {{name}}</option>
+      {{/courses}}
+    </select>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="taskType">Task Type</label>
+    <select id="taskType" name="taskType" required onchange="getTaskTitle()">
+      <option value=""></option>
+      {{#taskTypes}}
+        <option value="{{code}}" data-max="{{max}}">{{type}}</option>
+      {{/taskTypes}}
+    </select>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="title">Title</label>
+    <input type="text" class="col-sm-10" class="form-control" id="title" name="title" value="{{task.title}}" required>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="dueDate">Due Date</label>
+    <input type="date" id="dueDate" name="dueDate" required value="{{task.dueDate}}">
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="effortHours">Effort Hours</label>
+    <input type="number" id="effortHours" name="effortHours" step="any" required value="{{task.effortHours}}">
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="weight"> Weight (%)</label>
+    <div>
+      <output style="text-align: center; width: 50%;" id="selectedWeight" for="weight">1</output>
+      1 <input style="display: inline-block; width: 80%;" type="range" id="weight" name="weight"
+               min="1" max="100" value="{{task.weight}}"
+               oninput="selectedWeight.value = weight.value;"> 100
+    </div>
+  </div>
+  <input type="submit" class="btn btn-primary">
+</form>
+
+{{#if task.id}}
+  <script>
+    //After the document is loaded then select the current heroType in the heroType dropdown
+    //Using plain JavaScript
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector('#crn option[value="{{ task.crn }}"]').selected = true
+      document.querySelector('#taskType option[value="{{ task.taskType }}"]').selected = true
+      document.querySelector('#selectedWeight').value = {{ task.weight }}
+    })
+  </script>
+{{/if}}
+<script src="/views/js/taskEditor.js"></script>
+
+<!--
+
+<form action="/tasks" method="post">
+  <input type="hidden" id="taskId" name="id" value="">
+
+  <div class="form-inline">
+    <caption id="courseText">Select Course:</caption>
+    <select class="form-control" name="crn" id="crn">
+      <option value=""></option>
+      {{#courses}}
+        <option value="{{crn}}">{{code}} - {{name}}</option>
+      {{/courses}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Title:</label>
+    <input name="title" value="" type="text" class="form-control" id="title" required>
+  </div>
+
+  <div class="form-group">
+    <div class="form-inline">
+      <caption id="courseText">Type:</caption>
+      <select onchange="getTaskTitle(this.value)" class="form-control" name="taskType" id="taskType">
+        <option value=""></option>
+        {{#taskTypes}}
+          <option value="{{code}}">{{type}}</option>
+        {{/taskTypes}}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Deadline:</label>
+    <input onchange="checkDueDate(this.value)" name="dueDate" value="" type="date" class="form-control" id="deadline" required>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Effort Hours:</label>
+    <input name="effortHours" value="" type="number" class="form-control" id="effortHours" required>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Weight:</label>
+    <input name="weight" value="1" type="range" min="0" max="100" class="" id="weight"
+           oninput="selectedValue.value=this.value" required></input>
+    <output class="form-inline" id="selectedValue">1</output>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+-->

@@ -1,0 +1,17 @@
+{
+  "name": "rifq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "fs-promise": "^2.0.2",
+    "fs-extra": "^3.0.1",
+    "node-fetch": "^1.6.3"
+  }
+}

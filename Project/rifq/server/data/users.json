@@ -1,0 +1,96 @@
+[
+  {
+    "id": 10,
+    "username": "csfaculty",
+    "firstname": "CS",
+    "lastname": "Faculty",
+    "password": "password",
+    "type": "Faculty"
+  },
+  {
+    "id": 11,
+    "username": "cefaculty",
+    "firstname": "CE",
+    "lastname": "Faculty",
+    "password": "password",
+    "type": "Faculty"
+  },
+  {
+    "id": 100,
+    "username": "cscoordinator",
+    "firstname": "CS",
+    "lastname": "Coordinator",
+    "password": "password",
+    "type": "Coordinator",
+    "program": "CS"
+  },
+  {
+    "id": 101,
+    "username": "cecoordinator",
+    "firstname": "CE",
+    "lastname": "Coordinator",
+    "password": "password",
+    "type": "Coordinator",
+    "program": "CE"
+  },
+  {
+    "id": 2015001,
+    "username": "af15001",
+    "firstname": "Ali",
+    "lastname": "Faleh",
+    "password": "password",
+    "gender": "M",
+    "program": "CS",
+    "type": "Student",
+    "courseIds": [
+      151,
+      261,
+      263
+    ]
+  },
+  {
+    "id": 2015002,
+    "username": "ai15002",
+    "firstname": "Abbas",
+    "lastname": "Ibn Firnas",
+    "password": "password",
+    "gender": "M",
+    "program": "CS",
+    "type": "Student",
+    "courseIds": [
+      151,
+      251,
+      263
+    ]
+  },
+  {
+    "id": 2015003,
+    "username": "ff15003",
+    "firstname": "Fatima",
+    "lastname": "Fihriya",
+    "password": "password",
+    "gender": "F",
+    "program": "CE",
+    "type": "Student",
+    "courseIds": [
+      205,
+      261,
+      363
+    ]
+  },
+  {
+    "id": 2015004,
+    "username": "mb15004",
+    "firstname": "Mariam",
+    "lastname": "Bint Imran",
+    "password": "password",
+    "gender": "F",
+    "program": "CE",
+    "type": "Student",
+    "courseIds": [
+      151,
+      251,
+      363
+    ]
+  }
+]

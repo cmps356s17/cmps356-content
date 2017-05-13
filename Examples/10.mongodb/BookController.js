@@ -8,6 +8,12 @@ class BookController {
         res.json(stores)
     }
 
+    async getCategories(req, res) {
+        let categories = await this.bookRespository.getBookCategories()
+        console.log("getCategories", categories)
+        res.json(categories)
+    }
+
     async addBook(req, res) {
         let book = await this.bookRespository.addBook(req.body)
         res.status(201).send(book)

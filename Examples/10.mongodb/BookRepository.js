@@ -1,5 +1,3 @@
-'use strict'
-
 class BookRepository {
     constructor() {
         this.Store = require('./models/storeModel')
@@ -8,6 +6,10 @@ class BookRepository {
 
     getStores() {
         return this.Store.find({})
+    }
+
+    getBookCategories() {
+        return this.Book.distinct('category')
     }
 
     addBook(newBook) {
@@ -28,7 +30,8 @@ class BookRepository {
         }
 
         //populate('store') will replace the store Id with the corresponding store object. (add , 'name'  to only get the store name)
-        return query.populate('store')
+        query.populate('store')
+        return query
     }
 
     getBook(bookId) {

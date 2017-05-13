@@ -1,0 +1,54 @@
+.chart {
+    width: 80%;
+    height: 500px;
+    margin: auto;
+}
+
+th{
+    text-align: center;
+}
+
+#jt{
+    background-color: #2780e3;
+    color: white;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #2780e3;
+    color: white;
+}
+
+#element {
+    padding-left: 50px;
+    font-size: 18px;
+}
+
+#calendar {
+    background-color: #2780e3;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.fc-view-basicDay .fc-today {
+    color: black;
+    background-color :black;
+}
+
+caption {
+  font-weight: bold;
+}
+
+dialog {
+  width: 600px;
+  font-family:sans-serif;
+  padding: 5px 10px 20px 20px;
+}
+
+.dialog-header {
+  padding: 5px 5px;
+  background-color: #434a54;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}

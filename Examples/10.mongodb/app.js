@@ -20,6 +20,7 @@ app.use(bodyParser.json())
 let bookController = require('./BookController')
 
 app.get('/api/stores', (req, res) => bookController.getStores(req, res))
+app.get('/api/categories', (req, res) => bookController.getCategories(req, res))
 
 app.post('/api/books', (req, res) => bookController.addBook(req, res))
 app.post('/api/books/:bookId/reviews', (req, res) => bookController.addReview(req, res))

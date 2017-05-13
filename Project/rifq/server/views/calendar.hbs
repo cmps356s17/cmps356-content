@@ -1,0 +1,31 @@
+<style>
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+</style>
+
+<div class="row col-md-12" >
+    <button id="syncButton" class="btn btn-primary pull-right" style="margin-bottom:20px;" onclick="syncToGoogleCalendar()">
+        <i id="syncIcon" class="glyphicon glyphicon-refresh"></i>  Sync to Google Calendar
+    </button>
+</div>
+
+<div class="row" ><div id='calendar'>
+
+</div></div>
+
+<link href='https://fullcalendar.io/js/fullcalendar-3.3.1/fullcalendar.min.css' rel='stylesheet' />
+<script src='https://fullcalendar.io/js/fullcalendar-3.3.1/lib/moment.min.js'></script>
+<script src='https://fullcalendar.io/js/fullcalendar-3.3.1/fullcalendar.min.js'></script>
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="views/js/utils.js"></script>
+<script src="views/js/calendar.js"></script>
