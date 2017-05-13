@@ -13,8 +13,8 @@ INDEX VERSION 1.129+D:\Users\ae\Google Drive\Teaching\CMPS356\cmps356-content\Ex
 3933357446.index
 2672335916.index
 2017505986.index
-486699731.index
 1904741536.index
+486699731.index
 1772877931.index
 4166838873.index
 2927524569.index

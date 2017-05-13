@@ -31,7 +31,7 @@ public class SurahRepository {
 		loadSurahs(); 
 	}
 
-	/*ToDo in the Lab:
+	/*ToDo:
 	 * Implement the following methods
 	 * getSurah(int id) => returns Surah by id
 	 * getSurahs(string type) => returns Surahs by type
