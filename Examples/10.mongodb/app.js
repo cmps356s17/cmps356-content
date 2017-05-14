@@ -1,8 +1,6 @@
-'use strict'
-
-let express = require('express')
-let mongoose = require('mongoose')
-let bodyParser = require('body-parser')
+const express = require('express')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 /* Very important
  This makes Mongoose async operations, like .save() and queries,
@@ -10,14 +8,14 @@ let bodyParser = require('body-parser')
  */
 mongoose.Promise = global.Promise
 
-let app = express()
+const app = express()
 
-let port = 9090 //process.env.PORT || 3000
+const port = 9090 //process.env.PORT || 3000
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
-let bookController = require('./BookController')
+const bookController = require('./BookController')
 
 app.get('/api/stores', (req, res) => bookController.getStores(req, res))
 app.get('/api/categories', (req, res) => bookController.getCategories(req, res))
@@ -36,7 +34,7 @@ app.get('/', function(req, res){
     res.send('Welcome to Books API available @ http://localhost:9090/api/books')
 })
 
-let dbConnection = mongoose.connect('mongodb://localhost/books', function(err) {
+const dbConnection = mongoose.connect('mongodb://localhost/books', function(err) {
     if (err) {
         console.log("Failed to connect to monogoDb " + err)
         return

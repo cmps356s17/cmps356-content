@@ -42,7 +42,7 @@ public class SurahRepository {
 	 */
 	
 	public List<Surah> getSurahs() {
-		Query query = em.createQuery("select s from Surah as s");
+		Query query = em.createQuery("select s from Surah s");
 		return query.getResultList();
 	}
 

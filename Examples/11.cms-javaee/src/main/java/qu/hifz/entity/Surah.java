@@ -1,11 +1,10 @@
 package qu.hifz.entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Surah implements Serializable {
+public class Surah {
     @Id private int id;
     private String name;
     private String englishName;

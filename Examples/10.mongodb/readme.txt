@@ -13,3 +13,8 @@ npm install
 To start MongoDB server, Open a commond line then:
 cd "C:\MongoDB\bin"   (!!!use the path where you installed MongoDB)
 mongod
+
+
+Libraries needed for unit testing
+npm install mocha --save-dev
+npm install chai --save-dev
