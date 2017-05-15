@@ -8,6 +8,14 @@
     "pages": 250
   },
   {
+    "isbn" : "223",
+    "title": "One Thousand and One Nights",
+    "authors": ["Mr Samir", "Ms. Samira"],
+    "publisher": {"name": "SamirCo", "country": "Qatar"},
+    "category": "Fun",
+    "pages": 150
+  },
+  {
     "isbn" : "234",
     "title": "Java 8",
     "authors": ["Fatima Zahra", "Ms Java"],

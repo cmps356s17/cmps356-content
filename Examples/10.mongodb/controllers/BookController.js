@@ -1,6 +1,6 @@
 class BookController {
     constructor() {
-        this.bookRespository = require('./BookRepository')
+        this.bookRespository = require('../models/BookRepository')
     }
 
     async getStores(req, res) {
@@ -22,12 +22,11 @@ class BookController {
     /*
     Example:
      {
-     "author": "Soft Reviewer",
-     "rating": 4,
-     "reviewText": "Fun but scary book :)"
+         "author": "Soft Reviewer",
+         "rating": 4,
+         "reviewText": "Fun but scary book :)"
      }
-
-     */
+    */
     addReview(req, res) {
         this.bookRespository.addReview(req.params.bookId, req.body).then(book => {
             res.status(200).send(book)

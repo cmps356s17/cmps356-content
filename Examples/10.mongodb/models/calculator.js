@@ -18,6 +18,7 @@ class Calculator {
             return x / y
         }
     }
+
 }
 
 module.exports = new Calculator();

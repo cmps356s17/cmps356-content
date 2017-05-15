@@ -15,7 +15,7 @@ const port = 9090 //process.env.PORT || 3000
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
-const bookController = require('./BookController')
+const bookController = require('./controllers/BookController')
 
 app.get('/api/stores', (req, res) => bookController.getStores(req, res))
 app.get('/api/categories', (req, res) => bookController.getCategories(req, res))

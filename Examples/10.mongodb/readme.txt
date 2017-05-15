@@ -5,7 +5,6 @@ You may add C:\MongoDB\bin\ to the Path System Variable.
 Create the following folder: C:\data\db  . You may use mkdir c:\data\db   (this is where MongoDB will create the databases)
 
 •	Download and install Robomongo https://robomongo.org/download  (this is a very good IDE to visually interact with MongoDB database)
-•	Install python (version 2.7.11) from: https://www.python.org/downloads/
 
 •	Install other packages using Webstorm terminal window
 npm install

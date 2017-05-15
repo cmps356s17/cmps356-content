@@ -2,6 +2,23 @@ const calculator = require('../models/calculator')
 const expect = require("chai").expect
 
 describe("Calculator Test Suite", () => {
+
+    before(function() {
+        // runs before all tests in this Test Suite
+    })
+
+    after(function() {
+        // runs after all tests in this Test Suite
+    })
+
+    beforeEach(function() {
+        // runs before each test in this Test Suite
+    })
+
+    afterEach(function() {
+        // runs after each test in this Test Suite
+    })
+
     it("should add two numbers", () => {
         expect( calculator.add(3, 2) ).to.equal(5)
         expect( calculator.add(1, 2) ).to.equal(3)
@@ -28,7 +45,32 @@ describe("Calculator Test Suite", () => {
         expect( calculator.multiply('a', 3) ).to.be.NaN
     })
 
-    it("my object has property foo", function() {
-        expect({ foo: 'baz' }).to.have.property('foo').and.equal('baz');
+    it("Other expect matchers", () => {
+        expect({ foo: 'baz' }).to.have.property('foo').and.equal('baz')
+        expect(1 === 1).to.be.true
+        expect('b' + 'a' + 'r' ).to.equal('bar')
+
+        expect(() => x.y.z).to.throw();
+        expect(() => x.y.z).to.throw(ReferenceError);
+        expect(() => x.y.z).to.throw(ReferenceError, /is not defined/);
+        expect(() => x.y.z).to.throw(/is not defined/);
+        expect(() => 42).not.to.throw();
+        expect(() => x.y.z).to.throw(Error);
+
+        expect( { foo: 'bar' }).to.have.property('foo').and.not.equal('baz')
+
+        expect([1, 2, 3]).to.include.members([3, 2]);
+        expect([1, 2, 3]).to.not.include.members([3, 2, 8]);
+
+        // deep referencing
+        let deepObj = {
+            green: { tea: 'matcha' }
+            , teas: [ 'chai', 'matcha', { tea: 'konacha' } ]
+        };
+
+        expect(deepObj).to.have.deep.property('green.tea', 'matcha');
+        expect(deepObj).to.have.deep.property('teas[1]', 'matcha');
+        expect(deepObj).to.have.deep.property('teas[2].tea', 'konacha');
+
     })
 })

@@ -1,8 +1,8 @@
 let mongoose = require('mongoose');
 
 let storeSchema = new mongoose.Schema({
-    name: String,
-    city: String
+    name: {type: String, required: true},
+    city: {type: String, required: true},
 });
 
 let Store = mongoose.model('Store', storeSchema)
