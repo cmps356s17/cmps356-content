@@ -7,7 +7,7 @@
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "dependencies": {
-    "fs-promise": "^2.0.3",
+    "fs-extra": "^3.0.1",
     "express": "^4.15.2",
     "body-parser": "^1.17.1",
     "mongoose": "^4.9.7"

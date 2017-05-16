@@ -104,8 +104,11 @@ class BookController {
             .catch(err => res.status(500).send(err))
     }
 
-    initDb() {
-        this.bookRespository.initDb()
+    async initDb (req, res) {
+        await this.bookRespository.initDb()
+        if (res) {
+            res.status(200).send('done')
+        }
     }
 }
 

@@ -17,13 +17,16 @@ app.use(bodyParser.json())
 
 const bookController = require('./controllers/BookController')
 
+app.get('/api/books/initdb', (req, res) => bookController.initDb(req, res))
+
 app.get('/api/stores', (req, res) => bookController.getStores(req, res))
 app.get('/api/categories', (req, res) => bookController.getCategories(req, res))
 
-app.post('/api/books', (req, res) => bookController.addBook(req, res))
-app.post('/api/books/:bookId/reviews', (req, res) => bookController.addReview(req, res))
 app.get('/api/books', (req, res) => bookController.getBooks(req, res))
 app.get('/api/books/:bookId', (req, res) => bookController.getBook(req, res))
+
+app.post('/api/books', (req, res) => bookController.addBook(req, res))
+app.post('/api/books/:bookId/reviews', (req, res) => bookController.addReview(req, res))
 
 app.put('/api/books/:bookId', (req, res) => bookController.updateBook(req, res))
 app.put('/api/books/:bookId/reviews/:reviewId', (req, res) => bookController.updateReview(req, res))

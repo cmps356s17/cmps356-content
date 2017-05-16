@@ -128,18 +128,17 @@ class BookRepository {
     }
 
     async loadDataFromJsonFiles() {
-        const fs = require('fs-promise')
+        const fs = require('fs-extra')
 
         const store1 = await this.addStore({name: 'Jarir Bookstore', city: 'Doha'})
         const store2 = await this.addStore({name: 'Jarir Bookstore', city: 'Dubai'})
 
-        const data = await fs.readFile('data/books.json')
-        const books = JSON.parse(data)
+        const books = await fs.readJson('data/books.json')
         console.log('Retrieved books from json file and added to MongoDB books Collection: ' + books.length)
 
         for (const book of books) {
             //Assign store1 to even and store2 to odd ISBNs
-            book.store = book.isbn % 2 ? store1 : store2
+            book.store = book.isbn % 2 ? store1._id : store2._id
             await this.addBook(book)
         }
     }
