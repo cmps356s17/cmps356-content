@@ -45,6 +45,7 @@ describe("Calculator Test Suite", () => {
         expect( calculator.multiply('a', 3) ).to.be.NaN
     })
 
+    //More info @ chaijs.com/api/bdd/
     it("Other expect matchers", () => {
         expect({ foo: 'baz' }).to.have.property('foo').and.equal('baz')
         expect(1 === 1).to.be.true

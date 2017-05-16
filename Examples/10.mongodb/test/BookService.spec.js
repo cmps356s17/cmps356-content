@@ -1,21 +1,17 @@
 //Require the dev-dependencies
-let chai = require('chai')
-let chaiHttp = require('chai-http')
-let should = chai.should()
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+const expect = chai.expect
 
 chai.use(chaiHttp)
 describe('Book Service Test Suite', () => {
 
-    describe('/GET book should return an array of 5 elements', () => {
-        it('it should GET all the books', (done) => {
-            chai.request('http://localhost:9090')
-                .get('/api/books')
-                .end((err, res) => {
-                    res.should.have.status(200)
-                    res.body.should.be.a('array')
-                    res.body.length.should.be.eql(5)
-                    done()
-                })
-        })
+    //More info @ http://chaijs.com/plugins/chai-http/
+    it('it should return an array of 5 elements', async () => {
+        const response = await chai.request('http://localhost:9090').get('/api/books')
+        expect(response).to.have.property('status', 200)
+        expect(response).to.have.property('body').and.be.a('array')
+        expect(response).to.have.deep.property('body.length', 5)
     })
+
 })
